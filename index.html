@@ -1,784 +1,209 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sentinela Digital – Proteção Anti-Golpes</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sentinela Digital - Proteção Anti-Fraude</title>
   <style>
+    /* CSS Variables para temas */
     :root {
-      --bg-main: #020617;
-      --bg-alt: #0f172a;
-      --card-bg: #020617;
-      --accent: #38bdf8;
-      --text-main: #e5e7eb;
-      --text-muted: #9ca3af;
-      --danger: #f97373;
-      --safe: #4ade80;
-      --warn: #facc15;
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f5;
+      --text-primary: #333333;
+      --text-secondary: #666666;
+      --accent: #0284c7;
+      --accent-hover: #00b4d8;
+      --header-bg: linear-gradient(135deg, #0284c7 0%, #00b4d8 100%);
+      --footer-bg: #333333;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    [data-theme="dark"] {
+      --bg-primary: #1a1a1a;
+      --bg-secondary: #2a2a2a;
+      --text-primary: #ffffff;
+      --text-secondary: #cccccc;
+      --accent: #00d4ff;
+      --accent-hover: #00b4d8;
+      --header-bg: linear-gradient(135deg, #0284c7 0%, #0066aa 100%);
+      --footer-bg: #111111;
     }
 
-    body {
-      font-family: var(--font-main);
-      background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
-      color: var(--text-main);
-      line-height: 1.6;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: Arial, sans-serif; 
+      line-height: 1.6; 
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      transition: all 0.3s ease;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    header { 
+      background: var(--header-bg); 
+      color: white; 
+      padding: 60px 20px; 
+      text-align: center; 
     }
+    header h1 { font-size: 48px; margin-bottom: 10px; }
+    header p { font-size: 24px; }
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(16px);
-      background: rgba(2, 6, 23, 0.85);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
-    }
-
-    .nav {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .nav-logo-badge {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #38bdf8, #0f172a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.9rem;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    .btn {
-      border-radius: 999px;
-      padding: 0.55rem 1.3rem;
-      font-size: 0.9rem;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: all 0.15s ease-out;
+    /* Botão Toggle Tema */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
       background: var(--accent);
-      color: #020617;
-      font-weight: 500;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    .theme-toggle:hover { 
+      background: var(--accent-hover);
+      transform: scale(1.05);
+    }
+    .theme-toggle .icon { 
+      margin-right: 6px; 
+      font-size: 16px; 
     }
 
-    .btn:hover {
-      filter: brightness(1.1);
-      transform: translateY(-1px);
+    section { max-width: 1000px; margin: 40px auto; padding: 20px; }
+    .hero { text-align: center; }
+    .features { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .feature { 
+      background: var(--bg-secondary); 
+      padding: 20px; 
+      border-radius: 8px; 
+      transition: background 0.3s ease;
     }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--accent);
-      border-color: rgba(148, 163, 184, 0.7);
+    .feature h3 { color: var(--accent); margin-bottom: 10px; }
+    .cta { 
+      background: var(--accent); 
+      color: white; 
+      padding: 15px 30px; 
+      border: none; 
+      border-radius: 5px; 
+      font-size: 18px; 
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
-
-    .btn-outline:hover {
-      border-color: var(--accent);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    main {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem 3rem;
-    }
-
-    section {
-      padding: 3rem 0;
-      border-bottom: 1px solid rgba(30, 64, 175, 0.2);
-    }
-
-    section:last-of-type {
-      border-bottom: none;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 2.5rem;
-      align-items: center;
-      padding-top: 2.5rem;
-    }
-
-    .hero-kicker {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent);
-      margin-bottom: 0.65rem;
-    }
-
-    .hero-title {
-      font-size: clamp(2.2rem, 4vw, 2.9rem);
-      line-height: 1.1;
-      margin-bottom: 0.9rem;
-    }
-
-    .hero-title span {
-      color: var(--accent);
-    }
-
-    .hero-subtitle {
-      color: var(--text-muted);
-      max-width: 32rem;
-      font-size: 0.98rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .hero-footnote {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .hero-card {
-      background: radial-gradient(circle at top left, #1e293b, #020617 60%);
-      border-radius: 1.25rem;
-      padding: 1.5rem 1.5rem 1.25rem;
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
-    }
-
-    .hero-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-    }
-
-    .hero-card-badge {
-      font-size: 0.75rem;
-      padding: 0.2rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--text-muted);
-    }
-
-    .hero-card-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.8rem;
-      font-size: 0.8rem;
-    }
-
-    .mini-card {
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 0.8rem;
-      padding: 0.7rem 0.75rem;
-      border: 1px solid rgba(55, 65, 81, 0.8);
-    }
-
-    .mini-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin-bottom: 0.2rem;
-    }
-
-    .mini-value {
-      font-size: 0.9rem;
-    }
-
-    .badge-safe {
-      color: var(--safe);
-    }
-
-    .badge-risk {
-      color: var(--danger);
-    }
-
-    .badge-warn {
-      color: var(--warn);
-    }
-
-    .section-title {
-      font-size: 1.5rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .section-subtitle {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      max-width: 32rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 2rem;
-      align-items: flex-start;
-    }
-
-    .list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      font-size: 0.98rem;
-    }
-
-    .list li {
-      display: flex;
-      gap: 0.55rem;
-    }
-
-    .list-dot {
-      margin-top: 0.35rem;
-      font-size: 0.7rem;
-      color: var(--accent);
-    }
-
-    .card {
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 1.1rem;
-      padding: 1.3rem 1.4rem;
-      border: 1px solid rgba(75, 85, 99, 0.9);
-    }
-
-    .tag {
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.4rem;
-    }
-
-    .pill {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      color: var(--text-muted);
-    }
-
-    .flow {
-      display: grid;
-      gap: 0.75rem;
-      margin-top: 0.75rem;
-      font-size: 0.9rem;
-    }
-
-    .flow-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-
-    .flow-index {
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      font-size: 0.75rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 0.1rem;
-      color: var(--accent);
-    }
-
-    .pill-status {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      color: var(--text-muted);
-    }
-
-    .cards-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.1rem;
-      margin-top: 0.75rem;
-    }
-
-    .kpi {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 0.1rem;
-    }
-
-    .kpi-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      margin-bottom: 0.35rem;
-    }
-
-    footer {
-      padding: 1.5rem;
-      border-top: 1px solid rgba(30, 64, 175, 0.6);
-      background: #020617;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      text-align: center;
-    }
-
-    footer span {
-      color: var(--accent);
-    }
-
-    .risk-simulator {
-      margin-top: 1rem;
-      font-size: 0.86rem;
-    }
-
-    .risk-input {
-      width: 100%;
-      border-radius: 0.7rem;
-      border: 1px solid rgba(75, 85, 99, 0.9);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text-main);
-      padding: 0.55rem 0.7rem;
-      font-size: 0.85rem;
-      resize: vertical;
-      min-height: 70px;
-      margin-bottom: 0.5rem;
-    }
-
-    .risk-output {
-      font-size: 0.86rem;
-      padding: 0.45rem 0.6rem;
-      border-radius: 0.7rem;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px dashed rgba(75, 85, 99, 0.9);
-      color: var(--text-muted);
-      min-height: 40px;
-    }
-
-    @media (max-width: 800px) {
-      .hero,
-      .two-col {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .hero {
-        padding-top: 1.5rem;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero-card {
-        order: -1;
-      }
+    .cta:hover { background: var(--accent-hover); }
+    footer { 
+      background: var(--footer-bg); 
+      color: white; 
+      text-align: center; 
+      padding: 20px; 
+      margin-top: 60px; 
     }
   </style>
 </head>
 <body>
+  <!-- Botão Toggle Tema -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+    <span class="icon">🌙</span>
+    <span class="text">Modo Escuro</span>
+  </button>
+
   <header>
-    <div class="nav">
-      <div class="nav-logo">
-        <div class="nav-logo-badge">SD</div>
-        <div>Sentinela Digital</div>
-      </div>
-      <nav class="nav-links">
-        <a href="#problema">Problema</a>
-        <a href="#solucao">Solução</a>
-        <a href="#tecnologia">Tecnologia</a>
-        <a href="#mvp">Roadmap</a>
-      </nav>
-      <button class="btn-outline" onclick="scrollToDemo()">Agendar demo</button>
-    </div>
+    <h1>🛡️ Sentinela Digital</h1>
+    <p>Proteção Anti-Fraude com IA Generativa</p>
   </header>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div>
-        <div class="hero-kicker">Proteção anti-golpes para quem mais precisa</div>
-        <h1 id="hero-title" class="hero-title">
-          Consultor de <span>Segurança de Bolso</span> para WhatsApp
-        </h1>
-        <p class="hero-subtitle">
-          O Sentinela Digital analisa mensagens e prints suspeitos em segundos,
-          usando IA generativa na AWS para proteger idosos e pessoas com baixa
-          literacia digital contra golpes financeiros.
-        </p>
-        <div class="hero-actions">
-          <button class="btn" onclick="scrollToDemo()">Quero ver funcionando</button>
-          <button class="btn-outline" onclick="scrollToTech()">Ver arquitetura técnica</button>
-        </div>
-        <div class="hero-footnote">
-          Tempo médio de resposta &lt; 5 segundos • Sem app para instalar • LGPD by design
-        </div>
-      </div>
+  <section class="hero">
+    <h2>Seu Consultor de Segurança de Bolso</h2>
+    <p>Análise instantânea de mensagens suspeitas via WhatsApp</p>
+    <p style="margin-top: 20px;">Apenas encaminhe a mensagem suspeita e receba um veredito em <strong>&lt;3 segundos</strong></p>
+  </section>
 
-      <aside class="hero-card" aria-label="Exemplo de análise de risco">
-        <div class="hero-card-header">
-          <div>
-            <div class="tag">Exemplo em tempo real</div>
-            <div style="font-size:0.95rem;">Mensagem recebida pelo WhatsApp</div>
-          </div>
-          <div class="hero-card-badge">Análise IA · AWS</div>
-        </div>
-        <div class="hero-card-grid">
-          <div class="mini-card">
-            <div class="mini-label">Texto</div>
-            <div class="mini-value">
-              “Mãe, troquei de número. Preciso pagar um boleto <span class="badge-risk">ainda hoje</span>…”
-            </div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-label">Veredito</div>
-            <div class="mini-value badge-risk">Alto risco · Possível golpe de “falso parente”</div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-label">IA Bedrock</div>
-            <div class="mini-value">
-              Detectado tom de urgência, pedido de dinheiro e padrão típico de engenharia social.
-            </div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-label">Resposta ao usuário</div>
-            <div class="mini-value badge-warn">
-              “Cuidado! Confirme por ligação de vídeo antes de enviar qualquer valor.”
-            </div>
-          </div>
-        </div>
-      </aside>
-    </section>
+  <section class="features">
+    <div class="feature">
+      <h3>🤖 IA Generativa</h3>
+      <p>Claude 3 detecta padrões de engenharia social</p>
+    </div>
+    <div class="feature">
+      <h3>📸 Análise Visual</h3>
+      <p>Rekognition identifica logos clonados</p>
+    </div>
+    <div class="feature">
+      <h3>⚡ Serverless</h3>
+      <p>AWS Lambda escalável automaticamente</p>
+    </div>
+    <div class="feature">
+      <h3>🔒 LGPD Compliant</h3>
+      <p>Dados deletados após 30 dias</p>
+    </div>
+  </section>
 
-    <!-- PROBLEMA -->
-    <section id="problema" aria-labelledby="problema-title">
-      <h2 class="section-title">O problema que atacamos</h2>
-      <p class="section-subtitle">
-        Golpes via WhatsApp e SMS crescem de forma exponencial, explorando medo,
-        urgência e confiança familiar, enquanto antivírus tradicionais não
-        enxergam esse tipo de fraude comportamental.
-      </p>
-      <div class="two-col">
-        <ul class="list">
-          <li>
-            <span class="list-dot">●</span>
-            <div>
-              <strong>Alvo mais vulnerável.</strong>
-              Idosos e pessoas com pouca familiaridade digital são
-              desproporcionalmente impactados por golpes de engenharia social.
-            </div>
-          </li>
-          <li>
-            <span class="list-dot">●</span>
-            <div>
-              <strong>Limite de tecnologia atual.</strong>
-              iOS e Android bloqueiam monitoramento passivo de telas e conversas
-              criptografadas, inviabilizando “antivírus de WhatsApp”.
-            </div>
-          </li>
-          <li>
-            <span class="list-dot">●</span>
-            <div>
-              <strong>Ferramentas genéricas.</strong>
-              Soluções tradicionais focam em malware e links, não em tom,
-              contexto e manipulação emocional.
-            </div>
-          </li>
-        </ul>
-        <div class="card">
-          <div class="tag">Oportunidade</div>
-          <div style="font-size:0.95rem;">
-            Um serviço de consultoria de segurança sob demanda, acionado via
-            WhatsApp, que responde em linguagem simples e atua antes do dinheiro
-            sair da conta.
-          </div>
-        </div>
-      </div>
-    </section>
+  <section>
+    <h2>Números</h2>
+    <ul style="font-size: 18px; line-height: 2.5;">
+      <li>📊 <strong>72%</strong> dos brasileiros foram alvo de fraudes</li>
+      <li>👴 <strong>3x</strong> mais propenso: idosos sofrem golpes</li>
+      <li>💰 <strong>R$ 18B</strong> em perdas anuais (fraudes)</li>
+      <li>📱 <strong>95%</strong> dos idosos usam WhatsApp</li>
+    </ul>
+  </section>
 
-    <!-- SOLUÇÃO / FLUXO -->
-    <section id="solucao" aria-labelledby="solucao-title">
-      <h2 class="section-title">Nossa solução: Sentinela Digital</h2>
-      <p class="section-subtitle">
-        Um contato de WhatsApp inteligente que recebe textos e prints, analisa o
-        conteúdo na nuvem AWS e devolve um semáforo de risco com orientação clara.
-      </p>
-      <div class="two-col">
-        <div>
-          <ul class="list">
-            <li>
-              <span class="list-dot">●</span>
-              <div>
-                <strong>Fluxo simples.</strong>
-                Usuário apenas encaminha a mensagem suspeita ou envia um print
-                da conversa.
-              </div>
-            </li>
-            <li>
-              <span class="list-dot">●</span>
-              <div>
-                <strong>IA especializada.</strong>
-                Modelos no Amazon Bedrock identificam padrões de engenharia
-                social como urgência, autoridade forjada e promessas irreais.
-              </div>
-            </li>
-            <li>
-              <span class="list-dot">●</span>
-              <div>
-                <strong>Resposta pedagógica.</strong>
-                Em vez de “permitido/bloqueado”, o usuário recebe uma explicação
-                em linguagem acessível.
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="card">
-          <div class="tag">Fluxo resumido</div>
-          <div class="flow">
-            <div class="flow-step">
-              <div class="flow-index">1</div>
-              <div>WhatsApp Business API envia o conteúdo para o API Gateway.</div>
-            </div>
-            <div class="flow-step">
-              <div class="flow-index">2</div>
-              <div>Função AWS Lambda em Python (boto3) orquestra texto, imagens e links.</div>
-            </div>
-            <div class="flow-step">
-              <div class="flow-index">3</div>
-              <div>Bedrock, Textract e Rekognition analisam contexto semântico e visual.</div>
-            </div>
-            <div class="flow-step">
-              <div class="flow-index">4</div>
-              <div>Veredito e orientação retornam ao usuário em menos de 5 segundos.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TECNOLOGIA -->
-    <section id="tecnologia" aria-labelledby="tech-title">
-      <h2 class="section-title">Arquitetura e tecnologia AWS</h2>
-      <p class="section-subtitle">
-        100% serverless, com foco em baixo custo inicial, alta disponibilidade
-        e privacidade por padrão, explorando a tríade Bedrock + Rekognition + Textract.
-      </p>
-      <div class="two-col">
-        <div class="card">
-          <div class="tag">Stack principal</div>
-          <div>
-            <div class="pill-row">
-              <span class="pill">API Gateway</span>
-              <span class="pill">AWS Lambda · Python</span>
-              <span class="pill">boto3</span>
-              <span class="pill">Amazon S3</span>
-              <span class="pill">DynamoDB</span>
-              <span class="pill">AWS WAF</span>
-            </div>
-            <div class="pill-row" style="margin-top:0.5rem;">
-              <span class="pill">Amazon Bedrock</span>
-              <span class="pill">Amazon Rekognition</span>
-              <span class="pill">Amazon Textract</span>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="tag">Simulador de risco (demo local)</div>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.4rem;">
-            Digite um exemplo de mensagem para ver como o Sentinela classificaria o risco.
-          </p>
-          <div class="risk-simulator">
-            <textarea id="riskInput" class="risk-input" placeholder="Ex: Oi mãe, troquei de número e preciso pagar um boleto ainda hoje, você pode fazer essa transferência pra mim?"></textarea>
-            <button class="btn" style="width:100%; margin-bottom:0.4rem;" onclick="simulateRisk()">
-              Analisar mensagem (simulação)
-            </button>
-            <div id="riskOutput" class="risk-output" aria-live="polite">
-              Aguardando mensagem para análise…
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- MVP / ROADMAP / KPIs -->
-    <section id="mvp" aria-labelledby="mvp-title">
-      <h2 class="section-title">MVP, roadmap e métricas</h2>
-      <p class="section-subtitle">
-        Em 6 sprints entregamos um bot de WhatsApp funcional, pronto para piloto
-        controlado, com telemetria e indicadores de impacto social.
-      </p>
-      <div class="two-col">
-        <div>
-          <div class="tag">Roadmap em 6 sprints</div>
-          <ul class="list" style="margin-top:0.5rem;">
-            <li>
-              <span class="list-dot">●</span>
-              <div><strong>Sprints 1-2.</strong> Fundação AWS, IAM, API Gateway, Lambda “hello world”.</div>
-            </li>
-            <li>
-              <span class="list-dot">●</span>
-              <div><strong>Sprints 3-4.</strong> Integração com Bedrock, Textract e Rekognition, engenharia de prompt.</div>
-            </li>
-            <li>
-              <span class="list-dot">●</span>
-              <div><strong>Sprints 5-6.</strong> Verificação de URLs, dashboards, ajustes de latência e piloto beta.</div>
-            </li>
-          </ul>
-        </div>
-        <div class="cards-row">
-          <div class="card">
-            <div class="kpi-label">Precisão</div>
-            <div class="kpi">95%+</div>
-            <div style="font-size:0.8rem; color:var(--text-muted);">
-              Target em detecção de golpes conhecidos a partir de dataset real de phishing.
-            </div>
-          </div>
-          <div class="card">
-            <div class="kpi-label">Latência</div>
-            <div class="kpi">&lt; 3s</div>
-            <div style="font-size:0.8rem; color:var(--text-muted);">
-              Do recebimento no WhatsApp até o veredito no dispositivo do usuário.
-            </div>
-          </div>
-          <div class="card">
-            <div class="kpi-label">Impacto anual</div>
-            <div class="kpi">R$ 50M</div>
-            <div style="font-size:0.8rem; color:var(--text-muted);">
-              Estimativa de perdas evitadas em golpes para o público atendido.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA FINAL -->
-    <section aria-labelledby="cta-title">
-      <h2 id="cta-title" class="section-title">Próximos passos</h2>
-      <p class="section-subtitle">
-        Buscamos parceiros estratégicos (bancos, seguradoras, órgãos públicos)
-        para levar o Sentinela Digital a milhões de famílias brasileiras.
-      </p>
-      <div class="two-col">
-        <div>
-          <div class="tag">Vamos conversar?</div>
-          <p style="font-size:0.95rem; margin-top:0.4rem;">
-            Apresentamos demo técnico, arquitetura detalhada na AWS e projeções
-            financeiras para implantação em escala nacional.
-          </p>
-        </div>
-        <div class="card">
-          <div class="tag">Contato</div>
-          <p style="font-size:0.9rem; margin-bottom:0.4rem;">
-            Preencha seus dados no formulário de interesse (ou adicione um link
-            para Typeform / Google Forms aqui).
-          </p>
-          <button class="btn" style="width:100%;" onclick="alert('Aqui entraria o link para o formulário ou WhatsApp comercial.')">
-            Quero ser parceiro do Sentinela
-          </button>
-        </div>
-      </div>
-    </section>
-  </main>
+  <section style="text-align: center;">
+    <h2>Investimento</h2>
+    <p style="font-size: 36px; color: var(--accent); margin: 20px 0;"><strong>R$ 180K</strong></p>
+    <p>Para desenvolvimento MVP + 6 meses operação</p>
+    <button class="cta">Entre em Contato</button>
+  </section>
 
   <footer>
-    Sentinela Digital · Proteção Anti-Fraude na AWS · <span>Beta</span>
+    <p>&copy; 2026 Sentinela Digital. Proteção contra fraudes digitais.</p>
   </footer>
 
   <script>
-    function scrollToDemo() {
-      document.getElementById("mvp").scrollIntoView({ behavior: "smooth" });
-    }
+    // Toggle Tema Claro/Escuro
+    const toggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
 
-    function scrollToTech() {
-      document.getElementById("tecnologia").scrollIntoView({ behavior: "smooth" });
-    }
+    // Carregar preferência salva
+    const savedTheme = localStorage.getItem('theme') || 
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    html.setAttribute('data-theme', savedTheme);
+    updateToggle(savedTheme);
 
-    function simulateRisk() {
-      const input = document.getElementById("riskInput").value.toLowerCase();
-      const output = document.getElementById("riskOutput");
-      if (!input.trim()) {
-        output.textContent = "Digite uma mensagem para simular a análise de risco.";
-        return;
-      }
+    // Alternar tema
+    toggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const newTheme = current === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggle(newTheme);
+    });
 
-      let score = 0;
-      const patterns = [
-        "boleto",
-        "urgente",
-        "ainda hoje",
-        "transferência",
-        "pix",
-        "troquei de número",
-        "senha",
-        "código",
-        "confirme os dados",
-        "premiado",
-        "prêmio"
-      ];
-
-      patterns.forEach((p) => {
-        if (input.includes(p)) score += 1;
-      });
-
-      if (score >= 4) {
-        output.innerHTML =
-          "<strong class='badge-risk'>Risco alto.</strong> Padrões típicos de golpe detectados. Confirme por outro canal antes de fazer qualquer pagamento.";
-      } else if (score >= 2) {
-        output.innerHTML =
-          "<strong class='badge-warn'>Risco moderado.</strong> Há sinais suspeitos. Desconfie de pedidos inesperados e valide a identidade.";
+    // Atualizar texto e ícone do botão
+    function updateToggle(theme) {
+      const icon = toggle.querySelector('.icon');
+      const text = toggle.querySelector('.text');
+      
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        text.textContent = 'Modo Claro';
+        toggle.setAttribute('aria-label', 'Alternar para modo claro');
       } else {
-        output.innerHTML =
-          "<strong class='badge-safe'>Risco baixo.</strong> Não foram encontrados sinais fortes de engenharia social, mas ainda assim mantenha atenção.";
+        icon.textContent = '🌙';
+        text.textContent = 'Modo Escuro';
+        toggle.setAttribute('aria-label', 'Alternar para modo escuro');
       }
     }
+
+    // Respeitar mudanças do sistema
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        const newTheme = e.matches ? 'dark' : 'light';
+        html.setAttribute('data-theme', newTheme);
+        updateToggle(newTheme);
+      }
+    });
   </script>
 </body>
 </html>
