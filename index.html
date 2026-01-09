@@ -40,9 +40,6 @@
       --card-shadow-strong: rgba(15, 23, 42, 0.9);
     }
 
-    /* =========================
-       RESET / BASE
-    ========================== */
     * {
       margin: 0;
       padding: 0;
@@ -66,9 +63,6 @@
       padding: 0 20px 80px;
     }
 
-    /* =========================
-       TOGGLE TEMA
-    ========================== */
     .theme-toggle {
       position: fixed;
       top: 24px;
@@ -96,13 +90,8 @@
       background: rgba(15, 23, 42, 0.55);
     }
 
-    .theme-toggle-icon {
-      font-size: 16px;
-    }
+    .theme-toggle-icon { font-size: 16px; }
 
-    /* =========================
-       HEADER
-    ========================== */
     header {
       background: var(--header-bg);
       color: #f9fafb;
@@ -110,10 +99,7 @@
       text-align: center;
     }
 
-    .header-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    .header-inner { max-width: 1100px; margin: 0 auto; }
 
     .logo-title {
       font-size: 44px;
@@ -138,27 +124,11 @@
       margin-top: 20px;
     }
 
-    .stat-item {
-      min-width: 140px;
-    }
+    .stat-item { min-width: 140px; }
+    .stat-number { font-size: 28px; font-weight: 800; }
+    .stat-label { font-size: 14px; opacity: 0.9; }
 
-    .stat-number {
-      font-size: 28px;
-      font-weight: 800;
-    }
-
-    .stat-label {
-      font-size: 14px;
-      opacity: 0.9;
-    }
-
-    /* =========================
-       HERO
-    ========================== */
-    .hero {
-      text-align: center;
-      padding: 60px 0 40px;
-    }
+    .hero { text-align: center; padding: 60px 0 40px; }
 
     .hero-title {
       font-size: 36px;
@@ -191,24 +161,10 @@
       font-weight: 600;
     }
 
-    .badge-seguro {
-      background: rgba(5, 150, 105, 0.12);
-      color: var(--success);
-    }
+    .badge-seguro { background: rgba(5, 150, 105, 0.12); color: var(--success); }
+    .badge-suspeito { background: rgba(217, 119, 6, 0.12); color: var(--warning); }
+    .badge-golpe { background: rgba(220, 38, 38, 0.12); color: var(--danger); }
 
-    .badge-suspeito {
-      background: rgba(217, 119, 6, 0.12);
-      color: var(--warning);
-    }
-
-    .badge-golpe {
-      background: rgba(220, 38, 38, 0.12);
-      color: var(--danger);
-    }
-
-    /* =========================
-       FEATURES
-    ========================== */
     .section-title {
       text-align: center;
       font-size: 28px;
@@ -236,10 +192,7 @@
       box-shadow: 0 22px 60px var(--card-shadow-strong);
     }
 
-    .feature-icon {
-      font-size: 34px;
-      margin-bottom: 14px;
-    }
+    .feature-icon { font-size: 34px; margin-bottom: 14px; }
 
     .feature-title {
       font-size: 18px;
@@ -248,14 +201,8 @@
       color: var(--accent);
     }
 
-    .feature-text {
-      font-size: 15px;
-      color: var(--text-secondary);
-    }
+    .feature-text { font-size: 15px; color: var(--text-secondary); }
 
-    /* =========================
-       ARQUITETURA
-    ========================== */
     .architecture {
       background: var(--bg-secondary);
       border-radius: 24px;
@@ -278,19 +225,9 @@
       box-shadow: 0 16px 40px var(--card-shadow);
     }
 
-    .service-name {
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
+    .service-name { font-weight: 700; margin-bottom: 4px; }
+    .service-desc { font-size: 14px; color: var(--text-secondary); }
 
-    .service-desc {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    /* =========================
-       INVESTIMENTO
-    ========================== */
     .investment {
       text-align: center;
       margin: 56px 0 32px;
@@ -301,25 +238,10 @@
       box-shadow: 0 24px 80px var(--card-shadow-strong);
     }
 
-    .investment-title {
-      font-size: 26px;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
+    .investment-title { font-size: 26px; font-weight: 800; margin-bottom: 16px; }
+    .investment-value { font-size: 42px; font-weight: 900; margin-bottom: 12px; }
+    .investment-text { font-size: 15px; opacity: 0.96; margin-bottom: 24px; }
 
-    .investment-value {
-      font-size: 42px;
-      font-weight: 900;
-      margin-bottom: 12px;
-    }
-
-    .investment-text {
-      font-size: 15px;
-      opacity: 0.96;
-      margin-bottom: 24px;
-    }
-
-    /* BOTÃO MELHORADO */
     .cta-button {
       display: inline-flex;
       align-items: center;
@@ -346,9 +268,6 @@
       box-shadow: 0 22px 60px rgba(15, 23, 42, 0.55);
     }
 
-    /* =========================
-       FOOTER
-    ========================== */
     footer {
       background: var(--footer-bg);
       color: #9ca3af;
@@ -378,9 +297,6 @@
       color: #111827;
     }
 
-    /* =========================
-       RESPONSIVO
-    ========================== */
     @media (max-width: 640px) {
       .logo-title { font-size: 32px; }
       .hero-title { font-size: 28px; }
@@ -390,18 +306,15 @@
   </style>
 </head>
 <body>
-  <!-- Botão Tema -->
   <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
     <span class="theme-toggle-icon" id="themeIcon">🌙</span>
     <span id="themeLabel">Modo escuro</span>
   </button>
 
-  <!-- HEADER -->
   <header>
     <div class="header-inner">
       <div class="logo-title">🛡️ SENTINELA DIGITAL</div>
       <div class="logo-subtitle">Proteção Anti-Fraude Inteligente na AWS</div>
-
       <div class="header-stats">
         <div class="stat-item">
           <div class="stat-number">72%</div>
@@ -420,7 +333,6 @@
   </header>
 
   <main>
-    <!-- HERO -->
     <section class="hero">
       <h1 class="hero-title">Consultor de Segurança de Bolso</h1>
       <p class="hero-subtitle">
@@ -434,7 +346,6 @@
       </div>
     </section>
 
-    <!-- FEATURES -->
     <h2 class="section-title">Como o Sentinela Protege o Usuário</h2>
     <section class="features-grid">
       <article class="feature-card">
@@ -474,7 +385,6 @@
       </article>
     </section>
 
-    <!-- ARQUITETURA -->
     <section class="architecture">
       <h2 class="section-title" style="margin-top:0;">Arquitetura AWS Serverless</h2>
       <div class="architecture-grid">
@@ -505,7 +415,6 @@
       </div>
     </section>
 
-    <!-- INVESTIMENTO -->
     <section class="investment">
       <h2 class="investment-title">Investimento Solicitado</h2>
       <div class="investment-value">R$ 180K</div>
@@ -523,7 +432,7 @@
   <footer>
     <div>© 2026 Sentinela Digital — Proteção contra golpes digitais para idosos e famílias.</div>
     <div class="footer-links">
-      <a href="docs/Sentinela Digital - Documentação Técnica.pdf" target="_blank" rel="noopener">
+      <a href="Sentinela Digital - Documentação Técnica.pdf" target="_blank" rel="noopener">
         📚 Documentação técnica
       </a>
       <a href="Slides_Projeto_Sentinela.pdf">Slides do projeto</a>
@@ -531,9 +440,7 @@
     </div>
   </footer>
 
-
   <script>
-    // Tema claro/escuro com localStorage
     const html = document.documentElement;
     const toggle = document.getElementById('themeToggle');
     const icon = document.getElementById('themeIcon');
@@ -551,7 +458,6 @@
       }
     }
 
-    // Inicialização
     (function initTheme() {
       const saved = localStorage.getItem('sentinela-theme');
       if (saved === 'dark' || saved === 'light') {
