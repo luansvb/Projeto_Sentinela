@@ -1,18 +1,6 @@
-:root {
-  --bg-main: #0a1929;
-  --card-bg: #1a2942;
-  --primary: #4fc3f7;
-  --primary-strong: #29b6f6;
-
-  --text-main: #ffffff;
-  --text-muted: #b0bec5;
-
-  --green: #00e676;
-  --yellow: #ffb300;
-  --red: #ff1744;
-
-  --shadow-strong: rgba(0, 0, 0, 0.7);
-}
+/* ======================================================
+   Sentinela Digital - CSS GLOBAL (VERSÃO ESTÁVEL)
+   ====================================================== */
 
 * {
   box-sizing: border-box;
@@ -20,286 +8,106 @@
   padding: 0;
 }
 
-/* ===== BASE ===== */
-
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #0a1929 0%, #1a3a52 100%);
-  color: var(--text-main);
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: radial-gradient(circle at top, #0e1b2c, #050b14);
+  color: #eaf2ff;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 30px 20px;
-  line-height: 1.6;
 }
 
-.container {
-  width: 100%;
-  max-width: 900px;
-  background: var(--card-bg);
-  border-radius: 24px;
-  padding: 50px;
-  box-shadow: 0 25px 60px var(--shadow-strong);
-  border: 3px solid rgba(79, 195, 247, 0.25);
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 20px;
 }
 
-/* ===== CABEÇALHO ===== */
+/* ================= HEADER ================= */
 
-.brand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  margin-bottom: 35px;
+header {
   text-align: center;
+  margin-bottom: 40px;
 }
 
-.logo-container {
-  width: 240px;
-  height: 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 5px;
+header img {
+  width: 120px;
+  margin-bottom: 20px;
 }
 
-.logo-container img {
-  width: 350px;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.45));
+header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
-
-.brand h1 {
-  font-size: 42px;
-  font-weight: 700;
-  color: var(--primary);
-  text-shadow: 0 2px 8px rgba(79, 195, 247, 0.5);
+header p {
+  color: #b7c9e6;
 }
 
-.subtitle {
-  text-align: center;
-  font-size: 22px;
-  margin-bottom: 35px;
-  color: var(--text-main);
-}
+/* ================= FORM ================= */
 
-/* ===== INPUT ===== */
-
-.input-label {
+label {
   display: block;
-  font-size: 20px;
+  margin-bottom: 8px;
   font-weight: 600;
-  margin-bottom: 12px;
-  color: var(--primary);
 }
 
 textarea {
   width: 100%;
-  height: 210px;
-  background: #0d1b2a;
-  border: 3px solid #2d4356;
-  border-radius: 16px;
-  padding: 22px;
-  font-size: 18px;
-  color: var(--text-main);
+  min-height: 140px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #2c4a7a;
+  background: #0b1626;
+  color: #fff;
   resize: vertical;
+  font-size: 15px;
 }
 
 textarea:focus {
   outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(79,195,247,.2);
+  border-color: #4fc3ff;
 }
 
-textarea::placeholder {
-  color: #607d8b;
-}
-
-.char-counter {
+.char-count {
   text-align: right;
-  font-size: 15px;
-  margin-top: 8px;
-  color: var(--text-muted);
+  margin-top: 6px;
+  font-size: 13px;
+  color: #9bb4d4;
 }
-
-/* ===== BOTÃO ===== */
 
 button {
   width: 100%;
-  margin-top: 28px;
-  padding: 26px;
-  font-size: 24px;
-  font-weight: 700;
-  border-radius: 16px;
+  margin-top: 20px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 14px;
   border: none;
   cursor: pointer;
-  background: linear-gradient(135deg, #29b6f6, #4fc3f7);
-  color: #0a1929;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 25px rgba(79,195,247,.4);
+  background: linear-gradient(135deg, #3fc6ff, #2a7cff);
+  color: #001528;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(79,195,247,.6);
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
 button:disabled {
-  opacity: .6;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* ===== RESULTADO ===== */
+/* ================= RESULTADO ================= */
 
 .resultado {
-  margin-top: 40px;
-  padding: 32px;
-  border-radius: 20px;
-  display: none;
-  animation: fadeInUp .4s ease;
-}
-
-.resultado--vermelho {
-  display: block;
-  border: 4px solid var(--red);
-  background: rgba(255,23,68,.15);
-  animation: shakeAlert .6s ease;
-}
-
-.resultado--amarelo {
-  display: block;
-  border: 4px solid var(--yellow);
-  background: rgba(255,179,0,.15);
-  animation: pulseWarning 1.2s ease-in-out infinite alternate;
-}
-
-.resultado--verde {
-  display: block;
-  border: 4px solid var(--green);
-  background: rgba(0,230,118,.15);
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes shakeAlert {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-6px); }
-  40% { transform: translateX(6px); }
-  60% { transform: translateX(-4px); }
-  80% { transform: translateX(4px); }
-  100% { transform: translateX(0); }
-}
-
-@keyframes pulseWarning {
-  from { box-shadow: 0 0 12px rgba(255,179,0,.4); }
-  to   { box-shadow: 0 0 26px rgba(255,179,0,.8); }
-}
-
-/* ===== 🔵 DICAS DE SEGURANÇA (REVITALIZADO) ===== */
-
-.dicas {
-  margin-top: 45px;
-  padding: 30px 35px;
-  background: rgba(79,195,247,0.08);
-  border-radius: 18px;
-  border: 2px solid rgba(79,195,247,0.35);
-}
-
-.dicas h3 {
-  font-size: 24px;
-  color: var(--primary);
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.dicas ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.dicas li {
-  font-size: 19px;
-  margin-bottom: 14px;
-  padding-left: 34px;
-  position: relative;
-  line-height: 1.7;
-  color: var(--text-main);
-}
-
-.dicas li::before {
-  content: "✔";
-  position: absolute;
-  left: 0;
-  top: 2px;
-  color: var(--green);
-  font-weight: bold;
-  font-size: 20px;
-}
-
-/* ===== FOOTER ===== */
-
-footer {
-  margin-top: 40px;
-  text-align: center;
-  font-size: 16px;
-  color: var(--text-muted);
-  padding-top: 20px;
-  border-top: 2px solid rgba(79,195,247,.2);
-}
-
-/* ===== RESPONSIVO ===== */
-
-@media (max-width: 768px) {
-  .container {
-    padding: 35px 25px;
-  }
-
-  .brand h1 {
-    font-size: 34px;
-  }
-
-  .subtitle {
-    font-size: 20px;
-  }
-
-  .dicas {
-    padding: 25px;
-  }
-
-  .dicas li {
-    font-size: 18px;
-  }
-
-@media (max-width: 768px) {
-  .logo-container {
-    width: 190px;
-    height: 190px;
-  }
-
-  .logo-container img {
-    width: 170px;
-  }
-}
-
-}
-/* ================================
-   RESULTADO DA ANÁLISE – SENTINELA
-   ================================ */
-
-.resultado {
-  margin-top: 32px;
+  margin-top: 36px;
   padding: 28px;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
+
+/* --- CORES --- */
 
 .resultado--verde {
   background: #e6f8f0;
@@ -319,10 +127,40 @@ footer {
   color: #5a1a14;
 }
 
-.resultado-bloco,
-.resultado-acao {
-  background: rgba(255,255,255,0.7);
+/* --- TEXTO --- */
+
+.resultado h2 {
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+
+.resultado h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.resultado ul {
+  padding-left: 22px;
+  margin-bottom: 18px;
+}
+
+.resultado ul li {
+  margin-bottom: 6px;
+}
+
+/* --- BLOCOS INTERNOS --- */
+
+.resultado-bloco {
+  background: rgba(255,255,255,0.6);
   padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.resultado-acao {
+  background: rgba(255,255,255,0.85);
+  padding: 16px;
+  border-left: 6px solid currentColor;
   border-radius: 12px;
   margin-bottom: 16px;
 }
@@ -330,4 +168,36 @@ footer {
 .resultado-confianca {
   text-align: right;
   font-size: 15px;
+  font-weight: 600;
+}
+
+/* ================= DICAS ================= */
+
+.dicas {
+  margin-top: 40px;
+  background: #0b1626;
+  padding: 22px;
+  border-radius: 14px;
+  border: 1px solid #2c4a7a;
+}
+
+.dicas h3 {
+  margin-bottom: 12px;
+}
+
+.dicas ul {
+  padding-left: 20px;
+}
+
+.dicas li {
+  margin-bottom: 6px;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+  margin-top: 40px;
+  font-size: 13px;
+  color: #9bb4d4;
+  text-align: center;
 }
