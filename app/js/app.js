@@ -1,49 +1,37 @@
 // =====================================================
-// Sentinela Digital - Frontend JS (VERSÃO FINAL)
+// Sentinela Digital - Frontend JS (VERSÃO ESTRUTURADA)
 // =====================================================
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Elementos da interface
   const textarea = document.getElementById("mensagem");
   const charCount = document.getElementById("charCount");
   const btn = document.getElementById("btn");
   const resultado = document.getElementById("resultado");
 
-  // Validação defensiva (evita JS morrer silenciosamente)
   if (!textarea || !charCount || !btn || !resultado) {
-    console.error("❌ Elementos da interface não encontrados no DOM.");
+    console.error("Elementos do DOM não encontrados.");
     return;
   }
 
-  // Contador de caracteres
   textarea.addEventListener("input", () => {
     charCount.textContent = textarea.value.length;
   });
 
-  // Mensagens padrão alinhadas ao projeto original
-  const MENSAGENS_PADRAO = {
-    verde: {
-      titulo: "✅ Mensagem segura",
-      texto:
-        "Nenhuma ação necessária. A mensagem não apresenta indícios relevantes de golpe."
-    },
-    amarelo: {
-      titulo: "⚠️ Atenção",
-      texto:
-        "A mensagem apresenta alguns sinais suspeitos. Tenha cautela e não forneça dados."
-    },
-    vermelho: {
-      titulo: "🚨 Possível golpe",
-      texto:
-        "A mensagem solicita ações sensíveis. Não responda, não clique em links e não forneça informações."
-    }
+  const TITULOS = {
+    verde: "🟢 MENSAGEM APARENTA SER SEGURA",
+    amarelo: "🟡 ATENÇÃO: MENSAGEM SUSPEITA",
+    vermelho: "🔴 POSSÍVEL GOLPE DETECTADO"
   };
 
-  // Clique no botão
+  const ACAO_PADRAO = {
+    verde: "Nenhuma ação necessária.",
+    amarelo: "Tenha cautela e evite fornecer dados.",
+    vermelho: "Não responda, não clique em links e não forneça informações."
+  };
+
   btn.addEventListener("click", analisar);
 
-  // Função principal
   async function analisar() {
     const texto = textarea.value.trim();
     if (!texto) {
@@ -51,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Estado de carregamento
     btn.disabled = true;
     btn.textContent = "⏳ Analisando...";
 
@@ -64,31 +51,50 @@ document.addEventListener("DOMContentLoaded", () => {
         "https://ly9yvqdsta.execute-api.us-east-1.amazonaws.com/prod/teste",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ mensagem: texto })
         }
       );
 
       const data = await response.json();
 
-      // Fallback seguro
-      const cor = MENSAGENS_PADRAO[data.cor] ? data.cor : "amarelo";
-      const msg = MENSAGENS_PADRAO[cor];
+      const cor = ["verde", "amarelo", "vermelho"].includes(data.cor)
+        ? data.cor
+        : "amarelo";
+
+      const motivos = Array.isArray(data.motivos) && data.motivos.length > 0
+        ? data.motivos
+        : ["Mensagem sem indícios claros de ação suspeita"];
+
+      const acao = data.acao_recomendada || ACAO_PADRAO[cor];
+      const confianca = data.confianca ?? "—";
 
       resultado.className = `resultado resultado--${cor}`;
+
       resultado.innerHTML = `
-        <h2>${msg.titulo}</h2>
-        <p>${msg.texto}</p>
+        <h2>${TITULOS[cor]}</h2>
+
+        <h3>Por que chegamos a essa conclusão?</h3>
+        <ul>
+          ${motivos.map(m => `<li>${m}</li>`).join("")}
+        </ul>
+
+        <div class="bloco-acao">
+          <h3>📌 O que você deve fazer:</h3>
+          <p>${acao}</p>
+        </div>
+
+        <div class="bloco-confianca">
+          <strong>📊 Confiança da análise:</strong> ${confianca}%
+        </div>
       `;
 
     } catch (error) {
-      console.error("Erro ao analisar:", error);
+      console.error(error);
 
       resultado.className = "resultado resultado--vermelho";
       resultado.innerHTML = `
-        <h2>❌ Erro de conexão</h2>
+        <h2>❌ Erro na análise</h2>
         <p>Não foi possível analisar a mensagem no momento. Tente novamente.</p>
       `;
     } finally {
