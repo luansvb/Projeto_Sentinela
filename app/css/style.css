@@ -1,8 +1,9 @@
 /* =====================================================
    SENTINELA DIGITAL
+   CSS compatível com o HTML atual
    ===================================================== */
 
-/* ---------- VARIÁVEIS GLOBAIS ---------- */
+/* ---------- VARIÁVEIS ---------- */
 :root {
   --verde: #2ecc71;
   --amarelo: #f1c40f;
@@ -11,10 +12,11 @@
   --bg: #f4f6f8;
   --card: #ffffff;
   --texto: #2c3e50;
-  --subtexto: #7f8c8d;
+  --subtexto: #6b7280;
 
-  --borda: #e0e0e0;
-  --sombra: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --borda: #e5e7eb;
+  --sombra: 0 12px 30px rgba(0, 0, 0, 0.08);
+  --azul: #2563eb;
 }
 
 /* ---------- RESET ---------- */
@@ -33,76 +35,129 @@ body {
 
 /* ---------- CONTAINER ---------- */
 .container {
-  max-width: 900px;
+  max-width: 880px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 24px;
 }
 
-/* ---------- HEADER ---------- */
-header {
+/* ---------- HEADER / BRAND ---------- */
+.brand {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
-header h1 {
-  font-size: 2.4rem;
-  margin-bottom: 10px;
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
 }
 
-header p {
+.logo-container img {
+  max-width: 140px;
+  height: auto;
+}
+
+.brand h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+}
+
+/* ---------- SUBTÍTULO ---------- */
+.subtitle {
+  text-align: center;
   color: var(--subtexto);
+  margin-bottom: 32px;
   font-size: 1rem;
+  line-height: 1.5;
 }
 
-/* ---------- INPUT ---------- */
+/* ---------- INPUT GROUP ---------- */
+.input-group {
+  background: var(--card);
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: var(--sombra);
+  margin-bottom: 24px;
+}
+
+.input-label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+}
+
 textarea {
   width: 100%;
   min-height: 120px;
-  padding: 15px;
-  font-size: 1rem;
+  padding: 14px;
   border-radius: 8px;
   border: 1px solid var(--borda);
+  font-size: 1rem;
   resize: vertical;
-  margin-bottom: 20px;
 }
 
 textarea:focus {
   outline: none;
-  border-color: #3498db;
+  border-color: var(--azul);
+}
+
+/* ---------- CONTADOR ---------- */
+.char-counter {
+  margin-top: 6px;
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--subtexto);
 }
 
 /* ---------- BOTÃO ---------- */
-button {
-  background: #3498db;
-  color: #fff;
+#btn {
+  display: block;
+  width: 100%;
+  margin: 20px 0 30px;
+  padding: 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 10px;
   border: none;
-  padding: 14px 24px;
-  font-size: 1rem;
-  border-radius: 8px;
   cursor: pointer;
+  background: var(--azul);
+  color: #fff;
   transition: 0.2s ease;
 }
 
-button:hover {
-  background: #2980b9;
+#btn:hover {
+  background: #1e40af;
 }
 
 /* ---------- RESULTADO ---------- */
-#resultado {
-  margin-top: 40px;
+.resultado {
+  margin-bottom: 30px;
 }
 
-/* ---------- CARD BASE ---------- */
+/* ---------- CARD RESULTADO ---------- */
 .card {
   background: var(--card);
-  border-radius: 12px;
-  padding: 24px;
+  padding: 22px;
+  border-radius: 14px;
   box-shadow: var(--sombra);
-  margin-bottom: 20px;
   border-left: 6px solid transparent;
+  margin-bottom: 16px;
 }
 
-/* ---------- CARD STATUS ---------- */
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card ul {
+  padding-left: 20px;
+}
+
+.card li {
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+/* ---------- CORES SEMÂNTICAS ---------- */
 .card.verde {
   border-left-color: var(--verde);
 }
@@ -115,48 +170,42 @@ button:hover {
   border-left-color: var(--vermelho);
 }
 
-/* ---------- TÍTULOS DOS CARDS ---------- */
-.card h2 {
-  font-size: 1.3rem;
+/* ---------- DICAS ---------- */
+.dicas {
+  background: var(--card);
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: var(--sombra);
+  margin-bottom: 30px;
+}
+
+.dicas h3 {
   margin-bottom: 12px;
 }
 
-/* ---------- TEXTO ---------- */
-.card p {
-  line-height: 1.6;
-  margin-bottom: 10px;
-}
-
-/* ---------- LISTA DE MOTIVOS ---------- */
-.card ul {
+.dicas ul {
   padding-left: 20px;
 }
 
-.card li {
+.dicas li {
   margin-bottom: 8px;
-}
-
-/* ---------- CONFIANÇA ---------- */
-.confianca {
-  font-size: 1.2rem;
-  font-weight: bold;
 }
 
 /* ---------- FOOTER ---------- */
 footer {
   text-align: center;
-  margin-top: 60px;
-  color: var(--subtexto);
   font-size: 0.9rem;
+  color: var(--subtexto);
+  line-height: 1.5;
 }
 
 /* ---------- RESPONSIVO ---------- */
 @media (max-width: 600px) {
-  header h1 {
+  .brand h1 {
     font-size: 1.8rem;
   }
 
-  .card {
-    padding: 18px;
+  .container {
+    padding: 16px;
   }
 }
