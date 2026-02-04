@@ -1,203 +1,162 @@
-/* ======================================================
-   Sentinela Digital - CSS GLOBAL (VERSÃO ESTÁVEL)
-   ====================================================== */
+/* =====================================================
+   SENTINELA DIGITAL
+   ===================================================== */
 
+/* ---------- VARIÁVEIS GLOBAIS ---------- */
+:root {
+  --verde: #2ecc71;
+  --amarelo: #f1c40f;
+  --vermelho: #e74c3c;
+
+  --bg: #f4f6f8;
+  --card: #ffffff;
+  --texto: #2c3e50;
+  --subtexto: #7f8c8d;
+
+  --borda: #e0e0e0;
+  --sombra: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- RESET ---------- */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 body {
-  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: radial-gradient(circle at top, #0e1b2c, #050b14);
-  color: #eaf2ff;
+  background: var(--bg);
+  color: var(--texto);
   min-height: 100vh;
 }
 
-main {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 48px 20px;
+/* ---------- CONTAINER ---------- */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
 }
 
-/* ================= HEADER ================= */
-
+/* ---------- HEADER ---------- */
 header {
   text-align: center;
   margin-bottom: 40px;
 }
 
-header img {
-  width: 120px;
-  margin-bottom: 20px;
-}
-
 header h1 {
-  font-size: 32px;
+  font-size: 2.4rem;
   margin-bottom: 10px;
 }
 
 header p {
-  color: #b7c9e6;
+  color: var(--subtexto);
+  font-size: 1rem;
 }
 
-/* ================= FORM ================= */
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
+/* ---------- INPUT ---------- */
 textarea {
   width: 100%;
-  min-height: 140px;
-  padding: 14px;
-  border-radius: 12px;
-  border: 1px solid #2c4a7a;
-  background: #0b1626;
-  color: #fff;
+  min-height: 120px;
+  padding: 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--borda);
   resize: vertical;
-  font-size: 15px;
+  margin-bottom: 20px;
 }
 
 textarea:focus {
   outline: none;
-  border-color: #4fc3ff;
+  border-color: #3498db;
 }
 
-.char-count {
-  text-align: right;
-  margin-top: 6px;
-  font-size: 13px;
-  color: #9bb4d4;
-}
-
+/* ---------- BOTÃO ---------- */
 button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 16px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 14px;
+  background: #3498db;
+  color: #fff;
   border: none;
+  padding: 14px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  background: linear-gradient(135deg, #3fc6ff, #2a7cff);
-  color: #001528;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  transition: 0.2s ease;
 }
 
 button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  background: #2980b9;
 }
 
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* ================= RESULTADO ================= */
-
-.resultado {
-  margin-top: 36px;
-  padding: 28px;
-  border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-}
-
-/* --- CORES --- */
-
-.resultado--verde {
-  background: #e6f8f0;
-  border: 3px solid #2ecc71;
-  color: #1e4632;
-}
-
-.resultado--amarelo {
-  background: #fff8e1;
-  border: 3px solid #f1c40f;
-  color: #5c4a00;
-}
-
-.resultado--vermelho {
-  background: #fdecea;
-  border: 3px solid #e74c3c;
-  color: #5a1a14;
-}
-
-/* --- TEXTO --- */
-
-.resultado h2 {
-  font-size: 22px;
-  margin-bottom: 18px;
-}
-
-.resultado h3 {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.resultado ul {
-  padding-left: 22px;
-  margin-bottom: 18px;
-}
-
-.resultado ul li {
-  margin-bottom: 6px;
-}
-
-/* --- BLOCOS INTERNOS --- */
-
-.resultado-bloco {
-  background: rgba(255,255,255,0.6);
-  padding: 16px;
-  border-radius: 12px;
-  margin-bottom: 16px;
-}
-
-.resultado-acao {
-  background: rgba(255,255,255,0.85);
-  padding: 16px;
-  border-left: 6px solid currentColor;
-  border-radius: 12px;
-  margin-bottom: 16px;
-}
-
-.resultado-confianca {
-  text-align: right;
-  font-size: 15px;
-  font-weight: 600;
-}
-
-/* ================= DICAS ================= */
-
-.dicas {
+/* ---------- RESULTADO ---------- */
+#resultado {
   margin-top: 40px;
-  background: #0b1626;
-  padding: 22px;
-  border-radius: 14px;
-  border: 1px solid #2c4a7a;
 }
 
-.dicas h3 {
+/* ---------- CARD BASE ---------- */
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--sombra);
+  margin-bottom: 20px;
+  border-left: 6px solid transparent;
+}
+
+/* ---------- CARD STATUS ---------- */
+.card.verde {
+  border-left-color: var(--verde);
+}
+
+.card.amarelo {
+  border-left-color: var(--amarelo);
+}
+
+.card.vermelho {
+  border-left-color: var(--vermelho);
+}
+
+/* ---------- TÍTULOS DOS CARDS ---------- */
+.card h2 {
+  font-size: 1.3rem;
   margin-bottom: 12px;
 }
 
-.dicas ul {
+/* ---------- TEXTO ---------- */
+.card p {
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* ---------- LISTA DE MOTIVOS ---------- */
+.card ul {
   padding-left: 20px;
 }
 
-.dicas li {
-  margin-bottom: 6px;
+.card li {
+  margin-bottom: 8px;
 }
 
-/* ================= FOOTER ================= */
+/* ---------- CONFIANÇA ---------- */
+.confianca {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
 
+/* ---------- FOOTER ---------- */
 footer {
-  margin-top: 40px;
-  font-size: 13px;
-  color: #9bb4d4;
   text-align: center;
+  margin-top: 60px;
+  color: var(--subtexto);
+  font-size: 0.9rem;
+}
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .card {
+    padding: 18px;
+  }
 }
