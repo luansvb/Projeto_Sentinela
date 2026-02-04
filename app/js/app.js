@@ -1,7 +1,3 @@
-// =====================================================
-// Sentinela Digital - Frontend JS
-// =====================================================
-
 document.addEventListener("DOMContentLoaded", () => {
 
   const textarea = document.getElementById("mensagem");
@@ -46,12 +42,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await response.json();
 
-      // Normalização defensiva
       const cor = ["verde", "amarelo", "vermelho"].includes(data.cor)
         ? data.cor
         : "amarelo";
 
-      // Motivos alinhados ao print original
+      const TITULOS = {
+        verde: "🟢 MENSAGEM APARENTA SER SEGURA",
+        amarelo: "🟡 ATENÇÃO: MENSAGEM SUSPEITA",
+        vermelho: "🔴 POSSÍVEL GOLPE DETECTADO"
+      };
+
       const MOTIVOS_PADRAO = {
         verde: [
           "Mensagem sem intenção de ação",
@@ -70,48 +70,42 @@ document.addEventListener("DOMContentLoaded", () => {
         ]
       };
 
-      const motivos =
-        Array.isArray(data.motivos) && data.motivos.length > 0
-          ? data.motivos
-          : MOTIVOS_PADRAO[cor];
-
       const ACAO_PADRAO = {
         verde: "Nenhuma ação necessária.",
         amarelo: "Tenha cautela e evite fornecer informações.",
         vermelho: "Não responda, não clique em links e não forneça dados."
       };
 
-      const TITULOS = {
-        verde: "🟢 MENSAGEM APARENTA SER SEGURA",
-        amarelo: "🟡 ATENÇÃO: MENSAGEM SUSPEITA",
-        vermelho: "🔴 POSSÍVEL GOLPE DETECTADO"
-      };
+      const motivos =
+        Array.isArray(data.motivos) && data.motivos.length > 0
+          ? data.motivos
+          : MOTIVOS_PADRAO[cor];
 
       const acao = data.acao_recomendada || ACAO_PADRAO[cor];
-      const confianca = data.confianca ?? "—";
+      const confianca = data.confianca ?? 95;
 
       resultado.className = `resultado resultado--${cor}`;
       resultado.innerHTML = `
         <h2>${TITULOS[cor]}</h2>
 
-        <h3>Por que chegamos a essa conclusão?</h3>
-        <ul>
-          ${motivos.map(m => `<li>${m}</li>`).join("")}
-        </ul>
+        <div class="resultado-bloco">
+          <h3>Por que chegamos a essa conclusão?</h3>
+          <ul>
+            ${motivos.map(m => `<li>${m}</li>`).join("")}
+          </ul>
+        </div>
 
-        <div class="bloco-acao">
-          <h3>📋 O que você deve fazer:</h3>
+        <div class="resultado-acao">
+          <h3>📋 O que você deve fazer</h3>
           <p>${acao}</p>
         </div>
 
-        <div class="bloco-confianca">
-          <strong>📊 Confiança da análise:</strong> ${confianca}%
+        <div class="resultado-confianca">
+          📊 Confiança da análise: <strong>${confianca}%</strong>
         </div>
       `;
 
     } catch (error) {
-      console.error(error);
-
       resultado.className = "resultado resultado--vermelho";
       resultado.innerHTML = `
         <h2>❌ Erro na análise</h2>
