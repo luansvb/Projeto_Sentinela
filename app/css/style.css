@@ -1,70 +1,333 @@
+:root {
+  --bg-main: #0a1929;
+  --card-bg: #1a2942;
+  --primary: #4fc3f7;
+  --primary-strong: #29b6f6;
+
+  --text-main: #ffffff;
+  --text-muted: #b0bec5;
+
+  --green: #00e676;
+  --yellow: #ffb300;
+  --red: #ff1744;
+
+  --shadow-strong: rgba(0, 0, 0, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== BASE ===== */
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0a1929 0%, #1a3a52 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: 900px;
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 50px;
+  box-shadow: 0 25px 60px var(--shadow-strong);
+  border: 3px solid rgba(79, 195, 247, 0.25);
+}
+
+/* ===== CABEÇALHO ===== */
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.logo-container {
+  width: 240px;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.logo-container img {
+  width: 350px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.45));
+}
+
+
+.brand h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--primary);
+  text-shadow: 0 2px 8px rgba(79, 195, 247, 0.5);
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 35px;
+  color: var(--text-main);
+}
+
+/* ===== INPUT ===== */
+
+.input-label {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+
+textarea {
+  width: 100%;
+  height: 210px;
+  background: #0d1b2a;
+  border: 3px solid #2d4356;
+  border-radius: 16px;
+  padding: 22px;
+  font-size: 18px;
+  color: var(--text-main);
+  resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79,195,247,.2);
+}
+
+textarea::placeholder {
+  color: #607d8b;
+}
+
+.char-counter {
+  text-align: right;
+  font-size: 15px;
+  margin-top: 8px;
+  color: var(--text-muted);
+}
+
+/* ===== BOTÃO ===== */
+
+button {
+  width: 100%;
+  margin-top: 28px;
+  padding: 26px;
+  font-size: 24px;
+  font-weight: 700;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #29b6f6, #4fc3f7);
+  color: #0a1929;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(79,195,247,.4);
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(79,195,247,.6);
+}
+
+button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* ===== RESULTADO ===== */
+
+.resultado {
+  margin-top: 40px;
+  padding: 32px;
+  border-radius: 20px;
+  display: none;
+  animation: fadeInUp .4s ease;
+}
+
+.resultado--vermelho {
+  display: block;
+  border: 4px solid var(--red);
+  background: rgba(255,23,68,.15);
+  animation: shakeAlert .6s ease;
+}
+
+.resultado--amarelo {
+  display: block;
+  border: 4px solid var(--yellow);
+  background: rgba(255,179,0,.15);
+  animation: pulseWarning 1.2s ease-in-out infinite alternate;
+}
+
+.resultado--verde {
+  display: block;
+  border: 4px solid var(--green);
+  background: rgba(0,230,118,.15);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shakeAlert {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes pulseWarning {
+  from { box-shadow: 0 0 12px rgba(255,179,0,.4); }
+  to   { box-shadow: 0 0 26px rgba(255,179,0,.8); }
+}
+
+/* ===== 🔵 DICAS DE SEGURANÇA (REVITALIZADO) ===== */
+
+.dicas {
+  margin-top: 45px;
+  padding: 30px 35px;
+  background: rgba(79,195,247,0.08);
+  border-radius: 18px;
+  border: 2px solid rgba(79,195,247,0.35);
+}
+
+.dicas h3 {
+  font-size: 24px;
+  color: var(--primary);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dicas ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.dicas li {
+  font-size: 19px;
+  margin-bottom: 14px;
+  padding-left: 34px;
+  position: relative;
+  line-height: 1.7;
+  color: var(--text-main);
+}
+
+.dicas li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  color: var(--green);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* ===== FOOTER ===== */
+
+footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--text-muted);
+  padding-top: 20px;
+  border-top: 2px solid rgba(79,195,247,.2);
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 35px 25px;
+  }
+
+  .brand h1 {
+    font-size: 34px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+  }
+
+  .dicas {
+    padding: 25px;
+  }
+
+  .dicas li {
+    font-size: 18px;
+  }
+
+@media (max-width: 768px) {
+  .logo-container {
+    width: 190px;
+    height: 190px;
+  }
+
+  .logo-container img {
+    width: 170px;
+  }
+}
+
+}
+/* ================================
+   RESULTADO DA ANÁLISE – SENTINELA
+   ================================ */
+
 .resultado {
   margin-top: 32px;
   padding: 28px;
   border-radius: 16px;
-  font-family: inherit;
   box-shadow: 0 8px 30px rgba(0,0,0,0.25);
 }
 
-.resultado h2 {
-  margin-bottom: 20px;
-  font-size: 22px;
-}
-
-.resultado h3 {
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-.resultado ul {
-  padding-left: 20px;
-  margin-bottom: 20px;
-}
-
-.resultado ul li {
-  margin-bottom: 6px;
-}
-
-/* VERDE */
 .resultado--verde {
   background: #e6f8f0;
   border: 3px solid #2ecc71;
   color: #1e4632;
 }
 
-/* AMARELO */
 .resultado--amarelo {
   background: #fff8e1;
   border: 3px solid #f1c40f;
   color: #5c4a00;
 }
 
-/* VERMELHO */
 .resultado--vermelho {
   background: #fdecea;
   border: 3px solid #e74c3c;
   color: #5a1a14;
 }
 
-/* Bloco explicação */
-.resultado-bloco {
-  background: rgba(255,255,255,0.6);
-  padding: 16px;
-  border-radius: 12px;
-  margin-bottom: 16px;
-}
-
-/* Ação */
+.resultado-bloco,
 .resultado-acao {
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.7);
   padding: 16px;
-  border-left: 6px solid currentColor;
   border-radius: 12px;
   margin-bottom: 16px;
 }
 
-/* Confiança */
 .resultado-confianca {
-  font-size: 15px;
   text-align: right;
+  font-size: 15px;
 }
