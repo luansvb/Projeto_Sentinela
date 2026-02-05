@@ -1,64 +1,239 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Sentinela Digital | Análise de Golpes</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sentinela Digital | Documentação do Projeto</title>
+  <meta name="description" content="Documentação técnica e conceitual do projeto Sentinela Digital — sistema de detecção de golpes com IA e AWS.">
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <main class="container">
-
-    <header class="brand">
-      <div class="logo-container">
-        <img src="img/sentinela_labs.png" alt="Logo Sentinela Digital">
+<header class="header" id="header">
+  <div class="container nav-container">
+    <div class="logo">
+      <img src="./img/sentinela_logo-removebg-preview.png" alt="Logo Sentinela Digital" class="logo-img">
+      <div class="logo-text">
+        <span class="brand">SENTINELA</span>
+        <span class="sub-brand">DIGITAL</span>
       </div>
-      <h1>Sentinela Digital</h1>
-    </header>
+    </div>
 
-    <p class="subtitle">
-      Cole abaixo uma mensagem suspeita.<br>
-      Nosso sistema analisa e informa o nível de risco em segundos.
+    <nav class="nav-links">
+      <a href="#problema">Problema</a>
+      <a href="#solucao">Solução</a>
+      <a href="#tecnologia">Tecnologia</a>
+      <a href="#arquitetura">Arquitetura</a>
+      <a href="#impacto">Impacto</a>
+      <a href="#equipe">Equipe</a>
+      <a href="https://luansvb.github.io/Sentinela_Digital/" target="_blank" class="nav-cta">
+        Acessar Sistema
+      </a>
+    </nav>
+
+    <button class="mobile-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <span class="badge">📚 Documentação Oficial</span>
+      <span class="doc-badge">Projeto Acadêmico</span>
+
+      <h1>Documentação do <span class="highlight">Sentinela Digital</span></h1>
+
+      <p class="hero-desc">
+        Documentação técnica e conceitual do sistema antifraude via WhatsApp,
+        desenvolvido com Inteligência Artificial da AWS e arquitetura serverless.
+      </p>
+
+      <div class="hero-btns">
+        <a href="https://luansvb.github.io/Sentinela_Digital/" target="_blank" class="btn-primary">
+          Acessar Sistema
+        </a>
+        <a href="#arquitetura" class="btn-secondary">
+          Arquitetura AWS
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section id="problema" class="problema-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">O Cenário</span>
+      <h2 class="section-title">A Epidemia de Fraudes Digitais no Brasil</h2>
+      <p class="section-subtitle">
+        Golpes modernos exploram engenharia social, não vulnerabilidades técnicas.
+        Ferramentas tradicionais não detectam manipulação psicológica.
+      </p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <span class="stat-number">72%</span>
+        <p class="stat-label">dos brasileiros foram alvo de golpes em 2024</p>
+        <span class="stat-source">Fonte: Kaspersky</span>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">💰</div>
+        <span class="stat-number">R$ 18B</span>
+        <p class="stat-label">perdidos anualmente em fraudes digitais</p>
+        <span class="stat-source">Fonte: Banco Central</span>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">👴</div>
+        <span class="stat-number">32M</span>
+        <p class="stat-label">de idosos vulneráveis conectados</p>
+        <span class="stat-source">Fonte: IBGE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUÇÃO -->
+<section id="solucao" class="solucao-section">
+  <div class="container split-section">
+    <div class="split-text">
+      <span class="section-tag">Nossa Abordagem</span>
+      <h2 class="section-title">Consultor de Segurança de Bolso</h2>
+      <p class="section-subtitle">
+        O usuário encaminha uma mensagem suspeita e recebe, em segundos,
+        um parecer claro sobre risco, motivo e ação recomendada.
+      </p>
+    </div>
+
+    <div class="split-image">
+      <img
+        src="./img/Consultor_de_Segurança_de_Bolso.png"
+        alt="Fluxo de análise de mensagens suspeitas pelo Sentinela Digital">
+    </div>
+  </div>
+</section>
+
+
+<!-- TECNOLOGIA -->
+<section id="tecnologia" class="tech-section">
+  <div class="container split-section reverse">
+    <div class="split-text">
+      <span class="section-tag">Stack Técnico</span>
+      <h2 class="section-title">Inteligência Artificial da AWS</h2>
+      <p class="section-subtitle">
+        Utilização de serviços gerenciados da AWS para análise semântica,
+        OCR e orquestração serverless, garantindo escalabilidade,
+        segurança e baixa latência.
+      </p>
+    </div>
+
+    <div class="split-image">
+      <img
+        src="./img/Inteligência_Artificial_da_AWS.png"
+        alt="Arquitetura de inteligência artificial em nuvem AWS">
+    </div>
+  </div>
+</section>
+
+
+<!-- ARQUITETURA -->
+<section id="arquitetura" class="arq-section">
+  <div class="container split-section reverse">
+    <div class="split-text">
+      <span class="section-tag">Infraestrutura</span>
+      <h2 class="section-title">Arquitetura AWS Serverless</h2>
+      <p class="section-subtitle">
+        O Sentinela Digital utiliza uma arquitetura totalmente serverless,
+        garantindo escalabilidade automática, alta disponibilidade
+        e baixo custo operacional.
+      </p>
+
+      <p class="section-subtitle" style="margin-top:16px;">
+        As mensagens recebidas via WhatsApp são processadas por funções AWS Lambda,
+        analisadas com serviços de IA da AWS e respondidas em segundos ao usuário.
+      </p>
+    </div>
+
+    <div class="split-image">
+      <img
+        src="./img/diagrama-claro.jpg"
+        alt="Arquitetura AWS Serverless do Sentinela Digital">
+    </div>
+  </div>
+</section>
+
+
+<!-- IMPACTO -->
+<section id="impacto" class="impact-section">
+  <div class="container split-section">
+    <div class="split-text">
+      <span class="section-tag">Resultados</span>
+      <h2 class="section-title">Impacto Social e Técnico</h2>
+      <p class="section-subtitle">
+        O Sentinela Digital contribui para a redução de golpes,
+        proteção de usuários vulneráveis e disseminação
+        de segurança digital acessível.
+      </p>
+    </div>
+
+    <div class="split-image">
+      <img
+        src="./img/Impacto_Social_e_Tecnico.png"
+        alt="Impacto social e técnico do Sentinela Digital">
+    </div>
+  </div>
+</section>
+
+
+<!-- EQUIPE -->
+<section id="equipe" class="team-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Time</span>
+      <h2 class="section-title">Equipe do Projeto</h2>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-member"><div class="member-avatar">LH</div><h3>Luan Henrique</h3></div>
+      <div class="team-member"><div class="member-avatar">JL</div><h3>Joana Luz</h3></div>
+      <div class="team-member"><div class="member-avatar">EB</div><h3>Érick Bauer</h3></div>
+      <div class="team-member"><div class="member-avatar">AM</div><h3>Amanda Martins</h3></div>
+      <div class="team-member"><div class="member-avatar">RN</div><h3>Rodrigo Nery</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-content">
+    <p class="footer-tagline">
+      Documentação oficial do projeto acadêmico Sentinela Digital.
     </p>
 
-    <section class="input-group">
-      <label for="mensagem" class="input-label">Mensagem para análise:</label>
+    <p>
+      🔗 Sistema em produção:
+      <a href="https://luansvb.github.io/Sentinela_Digital/" target="_blank">
+        Acessar Sentinela Digital
+      </a>
+    </p>
+  </div>
 
-      <textarea
-        id="mensagem"
-        maxlength="500"
-        placeholder="Exemplo: Parabéns! Você ganhou um prêmio de R$ 10.000. Clique aqui agora para receber."></textarea>
+  <div class="footer-copy">
+    <p>&copy; 2026 Sentinela Digital — Projeto Acadêmico</p>
+  </div>
+</footer>
 
-      <div class="char-counter">
-        <span id="charCount">0</span>/500 caracteres
-      </div>
-    </section>
-
-    <button id="btn">🔍 Analisar Mensagem</button>
-
-    <section id="resultado" class="resultado"></section>
-
-    <section class="dicas">
-      <h3>💡 Dicas de Segurança</h3>
-      <ul>
-        <li>Nunca clique em links de mensagens não solicitadas</li>
-        <li>Bancos não pedem senhas por SMS ou WhatsApp</li>
-        <li>Desconfie de prêmios ou promoções inesperadas</li>
-        <li>Sempre verifique o remetente antes de responder</li>
-        <li>Em caso de dúvida, entre em contato diretamente com a empresa</li>
-      </ul>
-    </section>
-
-    <footer>
-      <strong>⚠️ Importante:</strong> Esta é uma ferramenta de apoio à decisão.<br>
-      Não substitui análise humana criteriosa e bom senso.
-    </footer>
-
-  </main>
-
-  <script src="js/app.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
