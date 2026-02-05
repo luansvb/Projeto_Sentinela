@@ -20,21 +20,53 @@
     </header>
 
     <p class="subtitle">
-      Cole abaixo uma mensagem suspeita.<br>
+      Cole abaixo uma mensagem suspeita <strong>ou arraste um print da conversa</strong>.<br>
       Nosso sistema analisa e informa o nível de risco em segundos.
     </p>
 
+    <!-- GRUPO DE ENTRADA (texto + imagem) -->
     <section class="input-group">
-      <label for="mensagem" class="input-label">Mensagem para análise:</label>
 
-      <textarea
-        id="mensagem"
-        maxlength="500"
-        placeholder="Exemplo: Parabéns! Você ganhou um prêmio de R$ 10.000. Clique aqui agora para receber."></textarea>
+      <label for="mensagem" class="input-label">
+        Mensagem ou print para análise:
+      </label>
+
+      <!-- WRAPPER para drag & drop -->
+      <div class="input-wrapper" id="dropZone">
+
+        <textarea
+          id="mensagem"
+          maxlength="500"
+          placeholder="Cole a mensagem suspeita aqui ou arraste um print da conversa"></textarea>
+
+        <!-- OVERLAY (só aparece quando arrastar imagem) -->
+        <div class="drop-overlay" id="dropOverlay">
+          <div class="drop-overlay-content">
+            📷 Solte a imagem para análise
+          </div>
+        </div>
+
+      </div>
 
       <div class="char-counter">
         <span id="charCount">0</span>/500 caracteres
       </div>
+
+      <!-- INPUT DE ARQUIVO DISCRETO -->
+      <input
+        type="file"
+        id="imageInput"
+        accept="image/png, image/jpeg"
+        hidden
+      />
+
+      <button
+        type="button"
+        class="upload-link"
+        id="uploadBtn">
+        📎 Enviar print da conversa
+      </button>
+
     </section>
 
     <button id="btn">🔍 Analisar Mensagem</button>
