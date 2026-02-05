@@ -1,559 +1,64 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sentinela Digital | Proteção Anti-Fraude com IA AWS</title>
-  <meta name="description" content="Sistema inteligente de detecção de golpes digitais usando IA da AWS. Proteção em tempo real via WhatsApp.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <title>Sentinela Digital | Análise de Golpes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<!-- HEADER -->
-<header class="header" id="header">
-  <div class="container nav-container">
-    <div class="logo">
-      <img src="./img/logo_sentinela_final-Photoroom.png" alt="Logo Sentinela Digital" class="logo-img">
-      <div class="logo-text">
-        <span class="brand">SENTINELA</span>
-        <span class="sub-brand">DIGITAL</span>
-      </div>
-    </div>
-    <nav class="nav-links">
-      <a href="#problema">Problema</a>
-      <a href="#solucao">Solução</a>
-      <a href="#tecnologia">Tecnologia</a>
-      <a href="#arquitetura">Arquitetura</a>
-      <a href="#impacto">Impacto</a>
-      <a href="#equipe">Equipe</a>
-    </nav>
-    <button class="mobile-toggle" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</header>
+  <main class="container">
 
-<!-- HERO SECTION -->
-<section class="hero" id="hero">
-  <div class="container hero-grid">
-    <div class="hero-text">
-      <span class="badge">🛡️ Proteção em Tempo Real</span>
-      <h1>Inteligência Artificial contra <span class="highlight">Golpes Digitais</span></h1>
-      <p class="hero-desc">Sistema antifraude via WhatsApp usando Amazon Bedrock, Textract e arquitetura serverless AWS. Protegendo famílias vulneráveis com IA generativa.</p>
-      <div class="hero-stats">
-        <div class="mini-stat">
-          <span class="mini-number">&lt;3s</span>
-          <span class="mini-label">Latência</span>
-        </div>
-        <div class="mini-stat">
-          <span class="mini-number">87%</span>
-          <span class="mini-label">Precisão</span>
-        </div>
-        <div class="mini-stat">
-          <span class="mini-number">100%</span>
-          <span class="mini-label">Serverless</span>
-        </div>
+    <header class="brand">
+      <div class="logo-container">
+        <img src="img/sentinela_labs.png" alt="Logo Sentinela Digital">
       </div>
-      <div class="hero-btns">
-        <a href="#solucao" class="btn-primary">Ver Demonstração</a>
-        <a href="#arquitetura" class="btn-secondary">Arquitetura AWS</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="knight-wrapper">
-        <img src="./img/knight-background.png" alt="Sentinela Digital - Proteção IA" class="knight-main">
-      </div>
-    </div>
-  </div>
-</section>
+      <h1>Sentinela Digital</h1>
+    </header>
 
-<!-- PROBLEMA SECTION -->
-<section id="problema" class="problema-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">O Cenário</span>
-      <h2 class="section-title">A Epidemia de Fraudes Digitais no Brasil</h2>
-      <p class="section-subtitle">Golpes modernos exploram engenharia social, não vulnerabilidades técnicas. Ferramentas tradicionais não detectam manipulação psicológica.</p>
-    </div>
-    
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-icon">📊</div>
-        <span class="stat-number">72%</span>
-        <p class="stat-label">dos brasileiros foram alvo de golpes em 2024</p>
-        <span class="stat-source">Fonte: Kaspersky Security Report</span>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">💰</div>
-        <span class="stat-number">R$ 18B</span>
-        <p class="stat-label">perdidos anualmente em fraudes digitais</p>
-        <span class="stat-source">Fonte: Banco Central do Brasil</span>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">👴</div>
-        <span class="stat-number">32M</span>
-        <p class="stat-label">de idosos vulneráveis conectados</p>
-        <span class="stat-source">Fonte: IBGE 2024</span>
-      </div>
-    </div>
+    <p class="subtitle">
+      Cole abaixo uma mensagem suspeita.<br>
+      Nosso sistema analisa e informa o nível de risco em segundos.
+    </p>
 
-    <div class="problema-details">
-      <h3>Por que as soluções atuais falham?</h3>
-      <div class="problema-grid">
-        <div class="problema-item">
-          <span class="problema-number">01</span>
-          <h4>Antivírus Tradicionais</h4>
-          <p>Detectam malware, mas não engenharia social. Golpistas usam manipulação psicológica, não código malicioso.</p>
-        </div>
-        <div class="problema-item">
-          <span class="problema-number">02</span>
-          <h4>Restrições de Sistema Operacional</h4>
-          <p>iOS e Android bloqueiam apps de monitorar mensagens criptografadas por design de privacidade.</p>
-        </div>
-        <div class="problema-item">
-          <span class="problema-number">03</span>
-          <h4>Barreira de Acessibilidade</h4>
-          <p>Idosos não conseguem usar apps complexos. Precisam de solução simples, direta, sem instalação.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <section class="input-group">
+      <label for="mensagem" class="input-label">Mensagem para análise:</label>
 
-<!-- SOLUÇÃO SECTION -->
-<section id="solucao" class="solucao-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Nossa Abordagem</span>
-      <h2 class="section-title">Consultor de Segurança de Bolso</h2>
-      <p class="section-subtitle">Análise sob demanda via WhatsApp. Zero instalação. Máxima simplicidade.</p>
-    </div>
+      <textarea
+        id="mensagem"
+        maxlength="500"
+        placeholder="Exemplo: Parabéns! Você ganhou um prêmio de R$ 10.000. Clique aqui agora para receber."></textarea>
 
-    <div class="fluxo-wrapper">
-      <div class="fluxo-step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h3>Usuário Recebe Mensagem Suspeita</h3>
-          <p>Mensagem com urgência, link encurtado ou pedido de dados pessoais.</p>
-          <div class="step-visual">
-            <div class="fake-phone">
-              <div class="fake-message danger">
-                🚨 URGENTE: Seu banco detectou fraude.<br>
-                Clique aqui para confirmar: bit.ly/banco123<br>
-                <small>Válido por 1 hora!</small>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="char-counter">
+        <span id="charCount">0</span>/500 caracteres
       </div>
+    </section>
 
-      <div class="fluxo-arrow">↓</div>
+    <button id="btn">🔍 Analisar Mensagem</button>
 
-      <div class="fluxo-step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h3>Encaminha para Sentinela Digital</h3>
-          <p>Um toque: compartilhar mensagem para nosso contato WhatsApp.</p>
-          <div class="step-visual">
-            <div class="fake-phone">
-              <div class="fake-forward">
-                📤 Encaminhando para:<br>
-                <strong>@sentinela_digital</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <section id="resultado" class="resultado"></section>
 
-      <div class="fluxo-arrow">↓</div>
+    <section class="dicas">
+      <h3>💡 Dicas de Segurança</h3>
+      <ul>
+        <li>Nunca clique em links de mensagens não solicitadas</li>
+        <li>Bancos não pedem senhas por SMS ou WhatsApp</li>
+        <li>Desconfie de prêmios ou promoções inesperadas</li>
+        <li>Sempre verifique o remetente antes de responder</li>
+        <li>Em caso de dúvida, entre em contato diretamente com a empresa</li>
+      </ul>
+    </section>
 
-      <div class="fluxo-step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h3>IA Analisa em &lt;3 Segundos</h3>
-          <p>Bedrock (Claude 3) detecta padrões de engenharia social em tempo real.</p>
-          <div class="step-visual processing">
-            <div class="loading-animation">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <p class="processing-text">Analisando com IA...</p>
-          </div>
-        </div>
-      </div>
+    <footer>
+      <strong>⚠️ Importante:</strong> Esta é uma ferramenta de apoio à decisão.<br>
+      Não substitui análise humana criteriosa e bom senso.
+    </footer>
 
-      <div class="fluxo-arrow">↓</div>
+  </main>
 
-      <div class="fluxo-step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h3>Veredito Claro e Ação Recomendada</h3>
-          <p>Resposta em linguagem acessível com explicação e próximos passos.</p>
-          <div class="step-visual">
-            <div class="fake-phone">
-              <div class="fake-message safe">
-                <strong>🔴 GOLPE DETECTADO</strong><br><br>
-                ⚠️ <strong>Por quê?</strong><br>
-                • Urgência artificial ("válido 1h")<br>
-                • Link encurtado suspeito<br>
-                • Bancos NUNCA pedem senha por WhatsApp<br><br>
-                ✅ <strong>O que fazer:</strong><br>
-                Ignore esta mensagem. Se tiver dúvida, ligue para seu banco pelo número oficial no verso do cartão.<br><br>
-                <small>Confiança: 94%</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tipos-entrada">
-      <h3>Tipos de Entrada Suportados</h3>
-      <div class="tipos-grid">
-        <div class="tipo-card">
-          <div class="tipo-icon">💬</div>
-          <h4>Texto</h4>
-          <p>Mensagens suspeitas encaminhadas diretamente</p>
-        </div>
-        <div class="tipo-card">
-          <div class="tipo-icon">🖼️</div>
-          <h4>Imagens</h4>
-          <p>Prints de tela com OCR via Amazon Textract</p>
-        </div>
-        <div class="tipo-card">
-          <div class="tipo-icon">🔗</div>
-          <h4>Links</h4>
-          <p>URLs validadas contra bases de phishing</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TECNOLOGIA SECTION -->
-<section id="tecnologia" class="tech-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Stack Técnico</span>
-      <h2 class="section-title">Inteligência Artificial da AWS</h2>
-      <p class="section-subtitle">Arquitetura 100% serverless com serviços gerenciados de machine learning.</p>
-    </div>
-
-    <div class="tech-grid">
-      <div class="tech-card featured">
-        <div class="tech-header">
-          <div class="tech-logo">
-            <img src="./img/bedrock.png" alt="Amazon Bedrock" onerror="this.style.display='none'">
-          </div>
-          <div class="tech-title-group">
-            <h3>Amazon Bedrock</h3>
-            <p class="tech-role">Análise Comportamental</p>
-          </div>
-        </div>
-        <p class="tech-desc">Claude 3 Sonnet detecta padrões de engenharia social: urgência artificial, autoridade falsa, pedidos de dados sensíveis.</p>
-        <ul class="tech-features">
-          <li>✓ Detecção contextual de manipulação</li>
-          <li>✓ Análise semântica avançada</li>
-          <li>✓ Prompt engineering especializado</li>
-        </ul>
-      </div>
-
-      <div class="tech-card">
-        <div class="tech-header">
-          <div class="tech-logo">
-            <img src="./img/textract.jpg" alt="Amazon Textract" onerror="this.style.display='none'">
-          </div>
-          <div class="tech-title-group">
-            <h3>Amazon Textract</h3>
-            <p class="tech-role">OCR de Alta Precisão</p>
-          </div>
-        </div>
-        <p class="tech-desc">Extração de texto de prints de WhatsApp, SMS e e-mails com 96%+ de precisão.</p>
-        <ul class="tech-features">
-          <li>✓ OCR em tempo real</li>
-          <li>✓ Suporte a português BR</li>
-          <li>✓ Extração de layout</li>
-        </ul>
-      </div>
-
-      <div class="tech-card">
-        <div class="tech-header">
-          <div class="tech-logo">
-            <img src="./img/rekognition.png" alt="Amazon Rekognition" onerror="this.style.display='none'">
-          </div>
-          <div class="tech-title-group">
-            <h3>Amazon Rekognition</h3>
-            <p class="tech-role">Análise Visual</p>
-          </div>
-        </div>
-        <p class="tech-desc">Detecta logos clonados de bancos, padrões visuais suspeitos e elementos de phishing.</p>
-        <ul class="tech-features">
-          <li>✓ Detecção de logos falsificados</li>
-          <li>✓ Análise de design suspeito</li>
-          <li>✓ Moderação de conteúdo</li>
-        </ul>
-      </div>
-
-      <div class="tech-card">
-        <div class="tech-header">
-          <div class="tech-logo">
-            <img src="./img/lambda-logo.png" alt="AWS Lambda" onerror="this.style.display='none'">
-          </div>
-          <div class="tech-title-group">
-            <h3>AWS Lambda</h3>
-            <p class="tech-role">Orquestração</p>
-          </div>
-        </div>
-        <p class="tech-desc">Lógica de negócio em Python 3.11, escalando automaticamente de 0 a 1000 requisições/min.</p>
-        <ul class="tech-features">
-          <li>✓ Execução serverless</li>
-          <li>✓ Pay-per-use</li>
-          <li>✓ Auto-scaling</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ARQUITETURA SECTION -->
-<section id="arquitetura" class="arq-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Infraestrutura</span>
-      <h2 class="section-title">Arquitetura AWS Serverless</h2>
-      <p class="section-subtitle">Baixa latência, alta disponibilidade, segurança em camadas.</p>
-    </div>
-
-    <div class="diagram-container">
-      <img src="./img/diagrama-claro.jpg" alt="Arquitetura AWS Detalhada" class="diagram-img" onerror="this.parentElement.innerHTML='<div class=diagram-placeholder><p>📊 Diagrama de Arquitetura AWS</p><small>Adicione a imagem diagrama-aws.png na pasta /img</small></div>'">
-    </div>
-
-    <div class="arq-details">
-      <div class="arq-column">
-        <h3>📡 Entrada</h3>
-        <ul>
-          <li><strong>WhatsApp Business API</strong> - Webhook HTTPS</li>
-          <li><strong>API Gateway</strong> - Rate limiting 1000 req/min</li>
-          <li><strong>AWS WAF</strong> - Proteção DDoS</li>
-        </ul>
-      </div>
-      <div class="arq-column">
-        <h3>⚙️ Processamento</h3>
-        <ul>
-          <li><strong>Lambda (Python 3.11)</strong> - Handler principal</li>
-          <li><strong>S3</strong> - Storage temporário (auto-delete 1h)</li>
-          <li><strong>Bedrock/Textract/Rekognition</strong> - IA</li>
-        </ul>
-      </div>
-      <div class="arq-column">
-        <h3>💾 Persistência</h3>
-        <ul>
-          <li><strong>DynamoDB</strong> - Logs auditáveis (TTL 30 dias)</li>
-          <li><strong>CloudWatch</strong> - Métricas e alertas</li>
-          <li><strong>Terraform</strong> - IaC versionado</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="requisitos">
-      <h3>Requisitos Não-Funcionais</h3>
-      <div class="req-grid">
-        <div class="req-item">
-          <span class="req-icon">⚡</span>
-          <strong>Latência</strong>
-          <p>&lt;3s (p99)</p>
-        </div>
-        <div class="req-item">
-          <span class="req-icon">🎯</span>
-          <strong>Disponibilidade</strong>
-          <p>99.9% uptime</p>
-        </div>
-        <div class="req-item">
-          <span class="req-icon">🔒</span>
-          <strong>Segurança</strong>
-          <p>TLS 1.2+, HMAC-SHA256</p>
-        </div>
-        <div class="req-item">
-          <span class="req-icon">📊</span>
-          <strong>Throughput</strong>
-          <p>1000 análises/min</p>
-        </div>
-        <div class="req-item">
-          <span class="req-icon">🛡️</span>
-          <strong>Privacidade</strong>
-          <p>LGPD 100% compliant</p>
-        </div>
-        <div class="req-item">
-          <span class="req-icon">💰</span>
-          <strong>Custo</strong>
-          <p>Pay-per-use serverless</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- IMPACTO SECTION -->
-<section id="impacto" class="impact-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Resultados</span>
-      <h2 class="section-title">Impacto Social e Técnico</h2>
-    </div>
-
-    <div class="impact-grid">
-      <div class="impact-card">
-        <div class="impact-icon">🎯</div>
-        <h3>Precisão Comprovada</h3>
-        <p class="impact-number">87%</p>
-        <p>de acerto em dataset de 100 golpes reais testados</p>
-      </div>
-      <div class="impact-card">
-        <div class="impact-icon">⚡</div>
-        <h3>Velocidade</h3>
-        <p class="impact-number">2.8s</p>
-        <p>latência média de análise completa (texto + imagem)</p>
-      </div>
-      <div class="impact-card">
-        <div class="impact-icon">👥</div>
-        <h3>Público Alvo</h3>
-        <p class="impact-number">30M+</p>
-        <p>idosos brasileiros com WhatsApp ativo (95% cobertura)</p>
-      </div>
-    </div>
-
-    <div class="conformidade">
-      <div class="section-header">
-        <h3 class="conf-title">Conformidade e Privacidade</h3>
-        <p class="conf-subtitle">Segurança e proteção de dados em todas as camadas</p>
-      </div>
-      
-      <div class="conf-grid">
-        <div class="conf-card">
-          <div class="conf-icon">🔒</div>
-          <h4>Privacy by Design</h4>
-          <p>Dados deletados automaticamente após 30 dias (DynamoDB TTL). Sem armazenamento permanente de conteúdo sensível.</p>
-        </div>
-        
-        <div class="conf-card">
-          <div class="conf-icon">📊</div>
-          <h4>Minimização de Dados</h4>
-          <p>Coletamos apenas timestamp, resultado da análise e hash anônimo do usuário. Nenhum conteúdo de mensagem é retido.</p>
-        </div>
-        
-        <div class="conf-card">
-          <div class="conf-icon">🛡️</div>
-          <h4>Criptografia Total</h4>
-          <p>TLS 1.2+ em trânsito, AES-256 em repouso (S3-SSE, DynamoDB encryption). Zero tolerância a dados não criptografados.</p>
-        </div>
-        
-        <div class="conf-card">
-          <div class="conf-icon">📝</div>
-          <h4>Auditoria Completa</h4>
-          <p>CloudTrail + CloudWatch logs de todas operações AWS. Rastreabilidade total para compliance e investigação.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EQUIPE SECTION -->
-<section id="equipe" class="team-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Time</span>
-      <h2 class="section-title">Desenvolvido na Escola da Nuvem</h2>
-      <p class="section-subtitle">Projeto acadêmico de conclusão de curso AWS Re/Start</p>
-    </div>
-
-    <div class="team-grid">
-      <div class="team-member">
-        <div class="member-avatar">LH</div>
-        <h3>Luan Henrique</h3>
-      </div>
-      <div class="team-member">
-        <div class="member-avatar">JL</div>
-        <h3>Joana Luz</h3>
-      </div>
-      <div class="team-member">
-        <div class="member-avatar">EB</div>
-        <h3>Érick Bauer</h3>
-      </div>
-      <div class="team-member">
-        <div class="member-avatar">AM</div>
-        <h3>Amanda Martins</h3>
-      </div>
-      <div class="team-member">
-        <div class="member-avatar">RN</div>
-        <h3>Rodrigo Nery</h3>
-      </div>
-    </div>
-
-    <div class="project-info">
-      <div class="info-box">
-        <h4>📚 Instituição</h4>
-        <p>Escola da Nuvem - AWS Re/Start Brasil</p>
-      </div>
-      <div class="info-box">
-        <h4>📅 Período</h4>
-        <p>Setembro 2025 - Janeiro 2026</p>
-      </div>
-      <div class="info-box">
-        <h4>🎯 Objetivo</h4>
-        <p>Projeto acadêmico de conclusão de curso</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container footer-content">
-    <div class="footer-brand">
-      <div class="logo">
-        <img src="./img/sentinela_logo-removebg-preview.png" alt="Sentinela Digital" class="footer-logo-img">
-        <div class="logo-text">
-          <span class="brand">SENTINELA</span>
-          <span class="sub-brand">DIGITAL</span>
-        </div>
-      </div>
-      <p class="footer-tagline">Consultoria em Segurança Digital acessível para todos.</p>
-      <p class="footer-tech">Powered by AWS Serverless Architecture</p>
-    </div>
-    
-    <div class="footer-links">
-      <div class="footer-col">
-        <h4>Projeto</h4>
-        <ul>
-          <li><a href="#problema">O Problema</a></li>
-          <li><a href="#solucao">Solução</a></li>
-          <li><a href="#tecnologia">Tecnologia</a></li>
-          <li><a href="#arquitetura">Arquitetura</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Recursos</h4>
-        <ul>
-          <li><a href="https://github.com/luansvb/Projeto_Sentinela" target="_blank">GitHub</a></li>
-          <li><a href="#" target="_blank">Documentação Técnica</a></li>
-          <li><a href="#" target="_blank">Vídeo Demo</a></li>
-          <li><a href="#equipe">Equipe</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-copy">
-      <p>&copy; 2026 Sentinela Digital. Projeto Acadêmico - Escola da Nuvem.</p>
-      <p>Desenvolvido com AWS Lambda, Bedrock, Textract e Terraform.</p>
-    </div>
-  </footer>
-
-<script src="script.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
