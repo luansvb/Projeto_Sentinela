@@ -8,42 +8,68 @@
 </head>
 
 <body>
+
   <main class="container">
 
     <header class="brand">
-      <img
-        src="img/sentinela_labs.png"
-        alt="Logo Sentinela Digital"
-        class="logo"
-      />
+      <div class="logo-container">
+        <img src="img/sentinela_labs.png" alt="Logo Sentinela Digital">
+      </div>
       <h1>Sentinela Digital</h1>
-      <p class="subtitle">
-        Cole abaixo uma mensagem suspeita ou envie um print da conversa.<br>
-        Nosso sistema analisa e informa o nível de risco em segundos.
-      </p>
     </header>
 
-    <section class="input-group">
-      <label for="mensagem">Mensagem ou print para análise</label>
+    <p class="subtitle">
+      Cole abaixo uma mensagem suspeita <strong>ou arraste um print da conversa</strong>.<br>
+      Nosso sistema analisa e informa o nível de risco em segundos.
+    </p>
 
-      <textarea
-        id="mensagem"
-        maxlength="500"
-        placeholder="Cole a mensagem suspeita aqui ou arraste um print da conversa"
-      ></textarea>
+    <section class="input-group">
+
+      <label for="mensagem" class="input-label">
+        Mensagem ou print para análise:
+      </label>
+
+      <div class="input-wrapper" id="dropZone">
+
+        <textarea
+          id="mensagem"
+          maxlength="500"
+          placeholder="Cole a mensagem suspeita aqui ou arraste um print da conversa"></textarea>
+
+        <div class="drop-overlay" id="dropOverlay">
+          <div class="drop-overlay-content">
+            📷 Solte a imagem para análise
+          </div>
+        </div>
+
+      </div>
 
       <div class="char-counter">
         <span id="charCount">0</span>/500 caracteres
       </div>
 
-      <input type="file" id="imageInput" accept="image/png, image/jpeg" hidden>
+      <input
+        type="file"
+        id="imageInput"
+        accept="image/png, image/jpeg"
+        hidden
+      />
 
-      <button type="button" class="upload-link" id="uploadBtn">
+      <button
+        type="button"
+        class="upload-link"
+        id="uploadBtn">
         📎 Enviar print da conversa
       </button>
+
+      <!-- NOVO: feedback visual da imagem (não mexe no layout existente) -->
+      <div id="imageFeedback" style="display:none; margin-top:10px; color:#4fc3f7; font-weight:600;">
+        📎 Imagem anexada para análise
+      </div>
+
     </section>
 
-    <button id="btn" class="btn-primary">🔍 Analisar Mensagem</button>
+    <button id="btn">🔍 Analisar Mensagem</button>
 
     <section id="resultado" class="resultado"></section>
 
@@ -54,11 +80,13 @@
         <li>Bancos não pedem senhas por SMS ou WhatsApp</li>
         <li>Desconfie de prêmios ou promoções inesperadas</li>
         <li>Sempre verifique o remetente antes de responder</li>
+        <li>Em caso de dúvida, entre em contato diretamente com a empresa</li>
       </ul>
     </section>
 
     <footer>
-      ⚠️ Ferramenta de apoio à decisão. Não substitui análise humana criteriosa.
+      <strong>⚠️ Importante:</strong> Esta é uma ferramenta de apoio à decisão.<br>
+      Não substitui análise humana criteriosa e bom senso.
     </footer>
 
   </main>

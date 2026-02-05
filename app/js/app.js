@@ -2,74 +2,126 @@ const textarea = document.getElementById("mensagem");
 const charCount = document.getElementById("charCount");
 const btn = document.getElementById("btn");
 const resultado = document.getElementById("resultado");
+
+const dropZone = document.getElementById("dropZone");
+const dropOverlay = document.getElementById("dropOverlay");
 const imageInput = document.getElementById("imageInput");
 const uploadBtn = document.getElementById("uploadBtn");
-const imagePreview = document.getElementById("imagePreview");
+const imageFeedback = document.getElementById("imageFeedback");
 
 let imagemBase64 = null;
 
+// contador
 textarea.addEventListener("input", () => {
   charCount.textContent = textarea.value.length;
 });
 
-uploadBtn.onclick = () => imageInput.click();
+// drag visual
+["dragenter", "dragover"].forEach(eventName => {
+  dropZone.addEventListener(eventName, e => {
+    e.preventDefault();
+    dropZone.classList.add("drag-active");
+  });
+});
 
-imageInput.onchange = () => {
+["dragleave", "drop"].forEach(eventName => {
+  dropZone.addEventListener(eventName, e => {
+    e.preventDefault();
+    dropZone.classList.remove("drag-active");
+  });
+});
+
+// drop imagem
+dropZone.addEventListener("drop", e => {
+  const file = e.dataTransfer.files[0];
+  if (file) processarImagem(file);
+});
+
+// upload botão
+uploadBtn.addEventListener("click", () => imageInput.click());
+
+imageInput.addEventListener("change", () => {
   const file = imageInput.files[0];
-  if (!file) return;
+  if (file) processarImagem(file);
+});
+
+function processarImagem(file) {
+  if (!file.type.startsWith("image/")) {
+    alert("Por favor, envie apenas imagens.");
+    return;
+  }
 
   const reader = new FileReader();
   reader.onload = () => {
     imagemBase64 = reader.result.split(",")[1];
-    imagePreview.innerHTML = `<img src="${reader.result}"><p>📎 Imagem anexada</p>`;
-    imagePreview.classList.remove("hidden");
+    imageFeedback.style.display = "block";
     textarea.value = "";
     charCount.textContent = 0;
   };
   reader.readAsDataURL(file);
-};
+}
 
-btn.onclick = async () => {
+// envio
+btn.addEventListener("click", async () => {
+  const texto = textarea.value.trim();
+
+  if (!texto && !imagemBase64) {
+    alert("Cole uma mensagem ou envie um print para análise.");
+    return;
+  }
+
   btn.disabled = true;
   btn.textContent = "Analisando...";
+  resultado.innerHTML = "";
 
   const payload = imagemBase64
     ? { imagem_base64: imagemBase64 }
-    : { mensagem: textarea.value.trim() };
+    : { mensagem: texto };
 
-  const res = await fetch("https://ly9yvqdsta.execute-api.us-east-1.amazonaws.com/prod/teste", {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify(payload)
-  });
+  try {
+    const response = await fetch(
+      "https://ly9yvqdsta.execute-api.us-east-1.amazonaws.com/prod/teste",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }
+    );
 
-  const data = await res.json();
-  renderResultado(data);
-
-  btn.disabled = false;
-  btn.textContent = "🔍 Analisar Mensagem";
-  imagemBase64 = null;
-};
+    const data = await response.json();
+    renderResultado(data);
+  } catch {
+    resultado.innerHTML = "<p>Erro ao analisar. Tente novamente.</p>";
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "🔍 Analisar Mensagem";
+    imagemBase64 = null;
+    imageFeedback.style.display = "none";
+  }
+});
 
 function renderResultado(data) {
-  const cor = data.cor;
-  resultado.className = "resultado ativo";
+  const classe =
+    data.cor === "vermelho"
+      ? "resultado--vermelho"
+      : data.cor === "amarelo"
+      ? "resultado--amarelo"
+      : "resultado--verde";
 
+  const dotClass = data.cor;
+
+  const motivos = data.motivos?.length
+    ? `<ul>${data.motivos.map(m => `<li>${m}</li>`).join("")}</ul>`
+    : "";
+
+  resultado.className = `resultado ${classe}`;
   resultado.innerHTML = `
-    <div class="status-header">
-      <div class="bolinha ${cor}"></div>
-      <h3>${data.status}</h3>
-    </div>
-
-    <ul class="motivos">
-      ${data.motivos.map(m => `<li>${m}</li>`).join("")}
-    </ul>
-
-    <div class="acao">AÇÃO RECOMENDADA: ${data.acao_recomendada}</div>
-
-    <div class="confianca-bar">
-      <div class="confianca-fill" style="width:${data.confianca}%"></div>
-    </div>
-    <small>Confiança da análise: ${data.confianca}%</small>
+    <h3>
+      <span class="status-dot ${dotClass}"></span>
+      ${data.status}
+    </h3>
+    ${motivos}
+    <p><strong>AÇÃO recomendada:</strong> ${data.acao_recomendada}</p>
+    <p><strong>Confiança:</strong> ${data.confianca}%</p>
   `;
 }
