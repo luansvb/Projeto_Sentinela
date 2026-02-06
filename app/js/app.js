@@ -10,7 +10,7 @@ const uploadBtn = document.getElementById("uploadBtn");
 const imageIndicator = document.getElementById("imageIndicator");
 
 let imagemBase64 = null;
-let imagemPreview = null;
+let analisePorImagem = false;
 
 /* contador */
 textarea.addEventListener("input", () => {
@@ -54,8 +54,8 @@ function processarImagem(file) {
 
   const reader = new FileReader();
   reader.onload = () => {
-    imagemPreview = reader.result;
     imagemBase64 = reader.result.split(",")[1];
+    analisePorImagem = true;
 
     textarea.classList.add("image-loaded");
     imageIndicator.style.display = "block";
@@ -69,7 +69,7 @@ btn.addEventListener("click", async () => {
   const texto = textarea.value.trim();
 
   if (!texto && !imagemBase64) {
-    alert("Cole uma mensagem ou envie um print para análise.");
+    alert("Cole uma mensagem ou envie uma imagem para análise.");
     return;
   }
 
@@ -99,7 +99,7 @@ btn.addEventListener("click", async () => {
     btn.disabled = false;
     btn.textContent = "🔍 Analisar Mensagem";
     imagemBase64 = null;
-    imagemPreview = null;
+    analisePorImagem = false;
     textarea.classList.remove("image-loaded");
     imageIndicator.style.display = "none";
   }
@@ -113,22 +113,13 @@ function renderResultado(data) {
       ? "resultado--amarelo"
       : "resultado--verde";
 
-  let imagemHTML = "";
-
-  if (imagemPreview) {
-    imagemHTML = `
-      <div class="resultado-imagem-box">
-        <div class="resultado-imagem-badge">
-          📷 Análise realizada a partir de um print da conversa
-        </div>
-        <img src="${imagemPreview}" alt="Print analisado">
-      </div>
-    `;
-  }
+  const avisoImagem = analisePorImagem
+    ? `<div class="resultado-imagem-aviso">📷 Análise realizada a partir de imagem anexada</div>`
+    : "";
 
   resultado.className = `resultado ${classe}`;
   resultado.innerHTML = `
-    ${imagemHTML}
+    ${avisoImagem}
     <h3>
       <span class="status-dot ${data.cor}"></span>
       ${data.status.replace("URGENCIA","URGÊNCIA")}

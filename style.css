@@ -39,108 +39,7 @@ body {
   border: 3px solid rgba(79, 195, 247, 0.25);
 }
 
-.brand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  margin-bottom: 35px;
-  text-align: center;
-}
-
-.logo-container {
-  width: 240px;
-  height: 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-container img {
-  width: 350px;
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.45));
-}
-
-.brand h1 {
-  font-size: 42px;
-  color: var(--primary);
-}
-
-.subtitle {
-  text-align: center;
-  font-size: 22px;
-  margin-bottom: 35px;
-}
-
-.input-label {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: var(--primary);
-}
-
-.input-wrapper {
-  position: relative;
-}
-
-textarea {
-  width: 100%;
-  height: 210px;
-  background: #0d1b2a;
-  border: 3px solid #2d4356;
-  border-radius: 16px;
-  padding: 22px;
-  font-size: 18px;
-  color: var(--text-main);
-  resize: vertical;
-}
-
-textarea.image-loaded {
-  border-color: var(--green);
-  background: #0f2a22;
-}
-
-.char-counter {
-  text-align: right;
-  font-size: 15px;
-  margin-top: 8px;
-  color: var(--text-muted);
-}
-
-button {
-  width: 100%;
-  margin-top: 28px;
-  padding: 26px;
-  font-size: 24px;
-  font-weight: 700;
-  border-radius: 16px;
-  border: none;
-  cursor: pointer;
-  background: linear-gradient(135deg, #29b6f6, #4fc3f7);
-  color: #0a1929;
-}
-
-.upload-link {
-  margin-top: 18px;
-  padding: 16px;
-  background: rgba(79,195,247,0.12);
-  border: 2px dashed rgba(79,195,247,0.55);
-  border-radius: 16px;
-  color: var(--primary);
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.image-indicator {
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  background: rgba(0,230,118,0.15);
-  border: 1px solid rgba(0,230,118,0.5);
-  color: var(--green);
-  font-weight: 600;
-  display: none;
-}
+/* RESULTADO */
 
 .resultado {
   margin-top: 40px;
@@ -179,25 +78,15 @@ button {
 .status-dot.amarelo { background: var(--yellow); }
 .status-dot.vermelho { background: var(--red); }
 
-/* ===== INDICADOR DE IMAGEM ANALISADA ===== */
+/* INDICADOR DE ANÁLISE POR IMAGEM */
 
-.resultado-imagem-box {
-  margin-bottom: 20px;
-  padding: 14px;
-  border-radius: 14px;
-  background: rgba(79,195,247,0.08);
-  border: 1px solid rgba(79,195,247,0.35);
-}
-
-.resultado-imagem-badge {
+.resultado-imagem-aviso {
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(79,195,247,0.12);
+  border: 1px solid rgba(79,195,247,0.45);
+  color: #4fc3f7;
   font-weight: 700;
   font-size: 15px;
-  color: #4fc3f7;
-  margin-bottom: 10px;
-}
-
-.resultado-imagem-box img {
-  max-width: 160px;
-  border-radius: 10px;
-  border: 2px solid rgba(255,255,255,0.15);
 }
