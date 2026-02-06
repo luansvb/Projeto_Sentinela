@@ -10,6 +10,7 @@ const uploadBtn = document.getElementById("uploadBtn");
 const imageIndicator = document.getElementById("imageIndicator");
 
 let imagemBase64 = null;
+let imagemPreview = null;
 
 /* contador */
 textarea.addEventListener("input", () => {
@@ -53,7 +54,9 @@ function processarImagem(file) {
 
   const reader = new FileReader();
   reader.onload = () => {
+    imagemPreview = reader.result;
     imagemBase64 = reader.result.split(",")[1];
+
     textarea.classList.add("image-loaded");
     imageIndicator.style.display = "block";
     textarea.value = "";
@@ -73,7 +76,6 @@ btn.addEventListener("click", async () => {
   btn.disabled = true;
   btn.textContent = "Analisando...";
   resultado.innerHTML = "";
-  resultado.style.display = "none";
 
   const payload = imagemBase64
     ? { imagem_base64: imagemBase64 }
@@ -91,52 +93,50 @@ btn.addEventListener("click", async () => {
 
     const data = await response.json();
     renderResultado(data);
-
-  } catch (err) {
-    console.error(err);
-    resultado.className = "resultado resultado--amarelo";
-    resultado.style.display = "block";
-    resultado.innerHTML = "<p>❌ Erro ao analisar a mensagem.</p>";
+  } catch (e) {
+    alert("Erro ao comunicar com o servidor.");
   } finally {
     btn.disabled = false;
     btn.textContent = "🔍 Analisar Mensagem";
     imagemBase64 = null;
+    imagemPreview = null;
     textarea.classList.remove("image-loaded");
     imageIndicator.style.display = "none";
   }
 });
 
 function renderResultado(data) {
-  if (!data || !data.cor || !data.status) {
-    throw new Error("Resposta inválida do backend");
-  }
-
-  const cor = data.cor;
-  const motivos = Array.isArray(data.motivos) ? data.motivos : [];
-
   const classe =
-    cor === "vermelho"
+    data.cor === "vermelho"
       ? "resultado--vermelho"
-      : cor === "amarelo"
+      : data.cor === "amarelo"
       ? "resultado--amarelo"
       : "resultado--verde";
 
+  let imagemHTML = "";
+
+  if (imagemPreview) {
+    imagemHTML = `
+      <div class="resultado-imagem-box">
+        <div class="resultado-imagem-badge">
+          📷 Análise realizada a partir de um print da conversa
+        </div>
+        <img src="${imagemPreview}" alt="Print analisado">
+      </div>
+    `;
+  }
+
   resultado.className = `resultado ${classe}`;
-  resultado.style.display = "block";
-
   resultado.innerHTML = `
+    ${imagemHTML}
     <h3>
-      <span class="status-dot ${cor}"></span>
-      ${data.status}
+      <span class="status-dot ${data.cor}"></span>
+      ${data.status.replace("URGENCIA","URGÊNCIA")}
     </h3>
-
-    ${
-      motivos.length
-        ? `<ul>${motivos.map(m => `<li>${m}</li>`).join("")}</ul>`
-        : ""
-    }
-
-    <p><strong>Ação recomendada:</strong> ${data.acao_recomendada}</p>
+    <ul>
+      ${data.motivos.map(m => `<li>${m.replace("ACAO","AÇÃO")}</li>`).join("")}
+    </ul>
+    <p><strong>AÇÃO recomendada:</strong> ${data.acao_recomendada.replace("ACAO","AÇÃO")}</p>
     <p><strong>Confiança:</strong> ${data.confianca}%</p>
   `;
 }
