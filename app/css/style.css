@@ -99,14 +99,14 @@ textarea {
   transition: border-color .2s, box-shadow .2s, background .2s;
 }
 
-/* 🔵 IMAGEM SENDO ARRASTADA */
+/* drag ativo */
 .input-wrapper.drag-active textarea {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(79,195,247,.35);
   background: #10263a;
 }
 
-/* 🟢 IMAGEM CARREGADA */
+/* imagem carregada */
 textarea.image-loaded {
   border-color: var(--green);
   box-shadow: 0 0 0 3px rgba(0,230,118,.35);
@@ -124,7 +124,7 @@ textarea::placeholder {
   color: var(--text-muted);
 }
 
-/* ===== BOTÕES ===== */
+/* ===== BOTÃO PRINCIPAL ===== */
 button {
   width: 100%;
   margin-top: 28px;
@@ -138,6 +138,26 @@ button {
   color: #0a1929;
 }
 
+/* ===== BOTÃO DE UPLOAD (SECUNDÁRIO, DISCRETO) ===== */
+.upload-link {
+  margin-top: 18px;
+  width: 100%;
+  padding: 16px 18px;
+  background: rgba(79,195,247,0.12);
+  border: 2px dashed rgba(79,195,247,0.55);
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+}
+
 /* ===== RESULTADO ===== */
 .resultado {
   margin-top: 40px;
@@ -146,9 +166,23 @@ button {
   display: none;
 }
 
-.resultado--vermelho { display:block; border:4px solid var(--red); background:rgba(255,23,68,.15); }
-.resultado--amarelo { display:block; border:4px solid var(--yellow); background:rgba(255,179,0,.15); }
-.resultado--verde   { display:block; border:4px solid var(--green); background:rgba(0,230,118,.15); }
+.resultado--vermelho {
+  display: block;
+  border: 4px solid var(--red);
+  background: rgba(255,23,68,.15);
+}
+
+.resultado--amarelo {
+  display: block;
+  border: 4px solid var(--yellow);
+  background: rgba(255,179,0,.15);
+}
+
+.resultado--verde {
+  display: block;
+  border: 4px solid var(--green);
+  background: rgba(0,230,118,.15);
+}
 
 .status-dot {
   width: 14px;
