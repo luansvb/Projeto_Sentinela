@@ -11,69 +11,50 @@ const imageFeedback = document.getElementById("imageFeedback");
 
 let imagemBase64 = null;
 
-/* ===============================
-   CONTADOR
-=============================== */
+/* contador */
 textarea.addEventListener("input", () => {
   charCount.textContent = textarea.value.length;
 });
 
-/* ===============================
-   DRAG & DROP — FEEDBACK VISUAL
-=============================== */
-["dragenter", "dragover"].forEach(eventName => {
-  dropZone.addEventListener(eventName, e => {
+/* DRAG VISUAL */
+["dragenter", "dragover"].forEach(evt => {
+  dropZone.addEventListener(evt, e => {
     e.preventDefault();
-    e.stopPropagation();
-
     dropZone.classList.add("drag-active");
     dropOverlay.style.display = "flex";
   });
 });
 
-["dragleave", "dragend"].forEach(eventName => {
-  dropZone.addEventListener(eventName, e => {
+["dragleave", "drop"].forEach(evt => {
+  dropZone.addEventListener(evt, e => {
     e.preventDefault();
-    e.stopPropagation();
-
     dropZone.classList.remove("drag-active");
     dropOverlay.style.display = "none";
   });
 });
 
 dropZone.addEventListener("drop", e => {
-  e.preventDefault();
-  e.stopPropagation();
-
-  dropZone.classList.remove("drag-active");
-  dropOverlay.style.display = "none";
-
   const file = e.dataTransfer.files[0];
   if (file) processarImagem(file);
 });
 
-/* ===============================
-   UPLOAD VIA BOTÃO
-=============================== */
-uploadBtn.addEventListener("click", () => imageInput.click());
+uploadBtn.onclick = () => imageInput.click();
 
-imageInput.addEventListener("change", () => {
+imageInput.onchange = () => {
   const file = imageInput.files[0];
   if (file) processarImagem(file);
-});
+};
 
-/* ===============================
-   PROCESSA IMAGEM
-=============================== */
 function processarImagem(file) {
   if (!file.type.startsWith("image/")) {
-    alert("Por favor, envie apenas imagens (PNG ou JPG).");
+    alert("Envie apenas imagens.");
     return;
   }
 
   const reader = new FileReader();
   reader.onload = () => {
     imagemBase64 = reader.result.split(",")[1];
+    textarea.classList.add("image-loaded");
     imageFeedback.style.display = "block";
     textarea.value = "";
     charCount.textContent = 0;
@@ -81,9 +62,6 @@ function processarImagem(file) {
   reader.readAsDataURL(file);
 }
 
-/* ===============================
-   ENVIO
-=============================== */
 btn.addEventListener("click", async () => {
   const texto = textarea.value.trim();
 
@@ -101,49 +79,39 @@ btn.addEventListener("click", async () => {
     : { mensagem: texto };
 
   try {
-    const response = await fetch(
-      "https://ly9yvqdsta.execute-api.us-east-1.amazonaws.com/prod/teste",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      }
-    );
+    const res = await fetch("https://ly9yvqdsta.execute-api.us-east-1.amazonaws.com/prod/teste", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
 
-    const data = await response.json();
+    const data = await res.json();
     renderResultado(data);
-  } catch {
-    resultado.innerHTML = "<p>Erro ao analisar. Tente novamente.</p>";
   } finally {
     btn.disabled = false;
     btn.textContent = "🔍 Analisar Mensagem";
     imagemBase64 = null;
+    textarea.classList.remove("image-loaded");
     imageFeedback.style.display = "none";
   }
 });
 
-/* ===============================
-   RESULTADO
-=============================== */
+/* RESULTADO COM TEXTO CORRETO */
 function renderResultado(data) {
   const classe =
-    data.cor === "vermelho"
-      ? "resultado--vermelho"
-      : data.cor === "amarelo"
-      ? "resultado--amarelo"
-      : "resultado--verde";
-
-  const dot = data.cor;
-
-  const motivos = data.motivos?.length
-    ? `<ul>${data.motivos.map(m => `<li>${m}</li>`).join("")}</ul>`
-    : "";
+    data.cor === "vermelho" ? "resultado--vermelho" :
+    data.cor === "amarelo" ? "resultado--amarelo" :
+    "resultado--verde";
 
   resultado.className = `resultado ${classe}`;
+
   resultado.innerHTML = `
-    <h3><span class="status-dot ${dot}"></span>${data.status}</h3>
-    ${motivos}
-    <p><strong>AÇÃO recomendada:</strong> ${data.acao_recomendada}</p>
+    <h3>
+      <span class="status-dot ${data.cor}"></span>
+      ${data.status.replace("URGENCIA","URGÊNCIA")}
+    </h3>
+    <ul>${data.motivos.map(m => `<li>${m.replace("ACAO","AÇÃO")}</li>`).join("")}</ul>
+    <p><strong>AÇÃO recomendada:</strong> ${data.acao_recomendada.replace("ACAO","AÇÃO")}</p>
     <p><strong>Confiança:</strong> ${data.confianca}%</p>
   `;
 }
