@@ -7,7 +7,7 @@ const dropZone = document.getElementById("dropZone");
 const dropOverlay = document.getElementById("dropOverlay");
 const imageInput = document.getElementById("imageInput");
 const uploadBtn = document.getElementById("uploadBtn");
-const imageFeedback = document.getElementById("imageFeedback");
+const imageIndicator = document.getElementById("imageIndicator");
 
 let imagemBase64 = null;
 
@@ -16,7 +16,7 @@ textarea.addEventListener("input", () => {
   charCount.textContent = textarea.value.length;
 });
 
-/* DRAG VISUAL */
+/* drag visual */
 ["dragenter", "dragover"].forEach(evt => {
   dropZone.addEventListener(evt, e => {
     e.preventDefault();
@@ -55,7 +55,7 @@ function processarImagem(file) {
   reader.onload = () => {
     imagemBase64 = reader.result.split(",")[1];
     textarea.classList.add("image-loaded");
-    imageFeedback.style.display = "block";
+    imageIndicator.style.display = "block";
     textarea.value = "";
     charCount.textContent = 0;
   };
@@ -79,37 +79,37 @@ btn.addEventListener("click", async () => {
     : { mensagem: texto };
 
   try {
-    const res = await fetch("https://ly9yvqdsta.execute-api.us-east-1.amazonaws.com/prod/teste", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+    const response = await fetch(
+      "https://ly9yvqdsta.execute-api.us-east-1.amazonaws.com/prod/teste",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }
+    );
 
-    const data = await res.json();
+    const data = await response.json();
     renderResultado(data);
   } finally {
     btn.disabled = false;
     btn.textContent = "🔍 Analisar Mensagem";
     imagemBase64 = null;
     textarea.classList.remove("image-loaded");
-    imageFeedback.style.display = "none";
+    imageIndicator.style.display = "none";
   }
 });
 
-/* RESULTADO COM TEXTO CORRETO */
 function renderResultado(data) {
   const classe =
-    data.cor === "vermelho" ? "resultado--vermelho" :
-    data.cor === "amarelo" ? "resultado--amarelo" :
-    "resultado--verde";
+    data.cor === "vermelho"
+      ? "resultado--vermelho"
+      : data.cor === "amarelo"
+      ? "resultado--amarelo"
+      : "resultado--verde";
 
   resultado.className = `resultado ${classe}`;
-
   resultado.innerHTML = `
-    <h3>
-      <span class="status-dot ${data.cor}"></span>
-      ${data.status.replace("URGENCIA","URGÊNCIA")}
-    </h3>
+    <h3><span class="status-dot ${data.cor}"></span>${data.status.replace("URGENCIA","URGÊNCIA")}</h3>
     <ul>${data.motivos.map(m => `<li>${m.replace("ACAO","AÇÃO")}</li>`).join("")}</ul>
     <p><strong>AÇÃO recomendada:</strong> ${data.acao_recomendada.replace("ACAO","AÇÃO")}</p>
     <p><strong>Confiança:</strong> ${data.confianca}%</p>

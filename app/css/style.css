@@ -17,7 +17,6 @@
   padding: 0;
 }
 
-/* ===== BASE ===== */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #0a1929 0%, #1a3a52 100%);
@@ -41,6 +40,7 @@ body {
 }
 
 /* ===== CABEÇALHO ===== */
+
 .brand {
   display: flex;
   flex-direction: column;
@@ -75,6 +75,7 @@ body {
 }
 
 /* ===== INPUT ===== */
+
 .input-label {
   font-size: 20px;
   font-weight: 600;
@@ -99,14 +100,14 @@ textarea {
   transition: border-color .2s, box-shadow .2s, background .2s;
 }
 
-/* drag ativo */
+/* DRAG ATIVO */
 .input-wrapper.drag-active textarea {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(79,195,247,.35);
   background: #10263a;
 }
 
-/* imagem carregada */
+/* IMAGEM CARREGADA */
 textarea.image-loaded {
   border-color: var(--green);
   box-shadow: 0 0 0 3px rgba(0,230,118,.35);
@@ -124,7 +125,8 @@ textarea::placeholder {
   color: var(--text-muted);
 }
 
-/* ===== BOTÃO PRINCIPAL ===== */
+/* ===== BOTÕES ===== */
+
 button {
   width: 100%;
   margin-top: 28px;
@@ -138,7 +140,6 @@ button {
   color: #0a1929;
 }
 
-/* ===== BOTÃO DE UPLOAD (SECUNDÁRIO, DISCRETO) ===== */
 .upload-link {
   margin-top: 18px;
   width: 100%;
@@ -146,19 +147,31 @@ button {
   background: rgba(79,195,247,0.12);
   border: 2px dashed rgba(79,195,247,0.55);
   border-radius: 16px;
-
   display: flex;
-  align-items: center;
   justify-content: center;
   gap: 12px;
-
   font-size: 18px;
   font-weight: 600;
   color: var(--primary);
   cursor: pointer;
 }
 
+/* ===== INDICADOR DE IMAGEM ===== */
+
+.image-indicator {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(0,230,118,0.15);
+  border: 1px solid rgba(0,230,118,0.5);
+  color: var(--green);
+  font-weight: 600;
+  font-size: 15px;
+  display: none;
+}
+
 /* ===== RESULTADO ===== */
+
 .resultado {
   margin-top: 40px;
   padding: 32px;
@@ -197,6 +210,7 @@ button {
 .status-dot.vermelho { background: var(--red); }
 
 /* ===== DICAS ===== */
+
 .dicas {
   margin-top: 45px;
   padding: 30px;
