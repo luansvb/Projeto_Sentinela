@@ -11,33 +11,50 @@ const imageFeedback = document.getElementById("imageFeedback");
 
 let imagemBase64 = null;
 
-// contador
+/* ===============================
+   CONTADOR
+=============================== */
 textarea.addEventListener("input", () => {
   charCount.textContent = textarea.value.length;
 });
 
-// drag visual
+/* ===============================
+   DRAG & DROP — FEEDBACK VISUAL
+=============================== */
 ["dragenter", "dragover"].forEach(eventName => {
   dropZone.addEventListener(eventName, e => {
     e.preventDefault();
+    e.stopPropagation();
+
     dropZone.classList.add("drag-active");
+    dropOverlay.style.display = "flex";
   });
 });
 
-["dragleave", "drop"].forEach(eventName => {
+["dragleave", "dragend"].forEach(eventName => {
   dropZone.addEventListener(eventName, e => {
     e.preventDefault();
+    e.stopPropagation();
+
     dropZone.classList.remove("drag-active");
+    dropOverlay.style.display = "none";
   });
 });
 
-// drop imagem
 dropZone.addEventListener("drop", e => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  dropZone.classList.remove("drag-active");
+  dropOverlay.style.display = "none";
+
   const file = e.dataTransfer.files[0];
   if (file) processarImagem(file);
 });
 
-// upload botão
+/* ===============================
+   UPLOAD VIA BOTÃO
+=============================== */
 uploadBtn.addEventListener("click", () => imageInput.click());
 
 imageInput.addEventListener("change", () => {
@@ -45,9 +62,12 @@ imageInput.addEventListener("change", () => {
   if (file) processarImagem(file);
 });
 
+/* ===============================
+   PROCESSA IMAGEM
+=============================== */
 function processarImagem(file) {
   if (!file.type.startsWith("image/")) {
-    alert("Por favor, envie apenas imagens.");
+    alert("Por favor, envie apenas imagens (PNG ou JPG).");
     return;
   }
 
@@ -61,7 +81,9 @@ function processarImagem(file) {
   reader.readAsDataURL(file);
 }
 
-// envio
+/* ===============================
+   ENVIO
+=============================== */
 btn.addEventListener("click", async () => {
   const texto = textarea.value.trim();
 
@@ -100,6 +122,9 @@ btn.addEventListener("click", async () => {
   }
 });
 
+/* ===============================
+   RESULTADO
+=============================== */
 function renderResultado(data) {
   const classe =
     data.cor === "vermelho"
@@ -108,7 +133,7 @@ function renderResultado(data) {
       ? "resultado--amarelo"
       : "resultado--verde";
 
-  const dotClass = data.cor;
+  const dot = data.cor;
 
   const motivos = data.motivos?.length
     ? `<ul>${data.motivos.map(m => `<li>${m}</li>`).join("")}</ul>`
@@ -116,10 +141,7 @@ function renderResultado(data) {
 
   resultado.className = `resultado ${classe}`;
   resultado.innerHTML = `
-    <h3>
-      <span class="status-dot ${dotClass}"></span>
-      ${data.status}
-    </h3>
+    <h3><span class="status-dot ${dot}"></span>${data.status}</h3>
     ${motivos}
     <p><strong>AÇÃO recomendada:</strong> ${data.acao_recomendada}</p>
     <p><strong>Confiança:</strong> ${data.confianca}%</p>
